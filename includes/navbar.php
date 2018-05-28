@@ -20,17 +20,11 @@
             Présentation de la licence
           </a>
           <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
-<<<<<<< HEAD
+
             <a class="dropdown-item" href="objectifrythmes.php">
               Objectifs et rythme
             </a>
             <a class="dropdown-item" href="lieu.php">
-=======
-            <a class="dropdown-item" href="#">
-              Objectifs et rythme
-            </a>
-            <a class="dropdown-item" href="#">
->>>>>>> 56fa897c750a5d41c1f7d7e95a4fa2933ec2d1cd
               Lieu de formation
             </a>
             <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
