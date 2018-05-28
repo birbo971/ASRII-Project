@@ -5,15 +5,159 @@
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
+
+      <!-- Accueil -->
       <li class="nav-item">
-        <a class="nav-link active" href="index.php">Inscription</a>
+        <a class="nav-link active" href="index.php">
+          Accueil
+        </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="liste.php">Liste d'inscription</a>
+
+      <!-- Présentation de la licence -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Présentation de la licence
+        </a>
+        <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">
+            Objectifs et rythme
+          </a>
+          <a class="dropdown-item" href="#">
+            Lieu de formation
+          </a>
+          <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Programme
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">
+              Tronc commun
+            </a>
+            <a class="dropdown-item" href="#">
+              Parcours ASR2I
+            </a>
+          </div>
+        </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Liste de présence</a>
+
+      <!-- Espace entreprise -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Espace entreprise
+        </a>
+        <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Projet tuteuré
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">
+              Ajouter un projet tuteuré
+            </a>
+            <a class="dropdown-item" href="#">
+              Consulter ses projets tuteurés
+            </a>
+          </div>
+          <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Offre d'alternance
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">
+              Ajouter une offre d'alternance
+            </a>
+            <a class="dropdown-item" href="#">
+              Consulter ses offres d'alternances
+            </a>
+          </div>
+        </div>
       </li>
+
+      <!-- Espace étudiant -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Espace étudiant
+        </a>
+        <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">
+            Notes
+          </a>
+          <a class="dropdown-item" href="#">
+            Emploi du temps
+          </a>
+          <a class="dropdown-item" href="#">
+            Projets tuteurés
+          </a>
+          <a class="dropdown-item" href="#">
+            Offres d'alternance
+          </a>
+          <a class="dropdown-item" href="#">
+            Support de cours
+          </a>
+        </div>
+      </li>
+
+      <!-- Espace enseignant -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Espace enseignant
+        </a>
+        <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Notes
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">
+              Ajouter une note
+            </a>
+            <a class="dropdown-item" href="#">
+              Consulter ses notes déposées
+            </a>
+          </div>
+          <a class="dropdown-item" href="#">
+            Emploi du temps personnel
+          </a>
+          <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Support de cours
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">
+              Ajouter un support de cours
+            </a>
+            <a class="dropdown-item" href="#">
+              Consulter ses supports de cours
+            </a>
+          </div>
+        </div>
+      </li>
+
     </ul>
   </div>
 </nav>
+
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown link
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav> -->
