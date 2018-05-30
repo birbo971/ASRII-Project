@@ -24,10 +24,6 @@
               Objectifs et rythme
             </a>
             <a class="dropdown-item" href="lieu.php">
-            <a class="dropdown-item" href="#">
-              Objectifs et rythme
-            </a>
-            <a class="dropdown-item" href="#">
               Lieu de formation
             </a>
             <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
