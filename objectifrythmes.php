@@ -1,5 +1,6 @@
 <?php
 $titre ='Objectifs et Rythmes';
+$presentation="active";
 include('includes/header.php'); ?>
 
 <?php include('includes/navbar.php'); ?>
