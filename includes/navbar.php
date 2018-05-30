@@ -30,10 +30,10 @@
               Programme
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="troncCommun.php">
                 Tronc commun
               </a>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="parcoursASR2I.php">
                 Parcours ASR2I
               </a>
             </div>
