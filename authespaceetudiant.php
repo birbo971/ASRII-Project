@@ -6,7 +6,7 @@ include('includes/header.php'); ?>
   <h1>Authentification de l'étudiant</h1>
     <hr>
     <br/>
-  <form class="form" action="espaceetudiant.php" method="post">
+  <form class="form" action="authespaceetudiant.php" method="post">
     <div class="form-group">
    <label for="exampleInputEmail1">Adresse Email</label>
    <input type="email" name="emailEtudiant" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrez votre mail">
@@ -19,4 +19,5 @@ include('includes/header.php'); ?>
  <button type="submit" name="connexion" class="btn btn-default">Se connecter</button>
   </form>
 </div>
+<?php connexionEspaceEtud();?>
 <?php include("includes/footer.php"); ?>

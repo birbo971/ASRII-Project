@@ -1,4 +1,5 @@
 <?php
+include('includes/DB.php');
 session_start();
 function barMenu(){
 session_unset();
@@ -33,10 +34,29 @@ if(empty($_SESSION['NouvelleSession'])){
   }
 }
 function connexionEspaceEtud(){
+  $pdo = DB::get();
   if(isset($_POST['connexion'])){
+      if(!empty($_POST['emailEtudiant']) && !empty($_POST['motdepasseEtudiant'])){
       $Email_Etudiant = $_POST['emailEtudiant'];
       $Motdepasse_Etudiant = $_POST['motdepasseEtudiant'];
-      
+      $req = $pdo->prepare("SELECT * FROM `etudiant` WHERE email=:emailEtudiant AND mdp=:motdepasseEtudiant");
+      $req->execute(array(':emailEtudiant'=>$Email_Etudiant,
+                          ':motdepasseEtudiant'=>$Motdepasse_Etudiant));
+      $nb = $req->rowCount();
+                      if($nb!=0){  echo'<br/><div class="alert alert-success" role="alert">
+                        Vous avez bien été connecter ! Vous allez être rediriger dans 3 secondes.
+                    </div>';
+                    $_SESSION['NouvelleSession'] = $Email_Etudiant;
+                  }else{
+                    echo"<br/><div class='alert alert-warning' role='alert'>
+                      Vous n'existez pas dans la base !
+                  </div>";
+                  }
+                }else{
+      echo'<div class="alert alert-danger" role="alert">
+    Tout les champs dovent etre remplis !
+</div>';
+    }
   }
 }
 ?>
