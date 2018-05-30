@@ -1,9 +1,6 @@
 <?php
-<<<<<<< HEAD
-$title="Ajouter un projet tuteuré";
-=======
 $titre="Ajouter un projet tuteuré";
->>>>>>> 1dfaf339264fd012103e7692f836072a51116627
+ require('/includes/Ajouter_projet.php');
   include('/includes/header.php');
   include('includes/navbar.php');
   if( $_POST){
@@ -26,24 +23,22 @@ $titre="Ajouter un projet tuteuré";
     }else{
       $titre=$_POST['titre'];
     }
-<<<<<<< HEAD
     
-=======
-
->>>>>>> 1dfaf339264fd012103e7692f836072a51116627
     if( empty($_POST['description'])){
       $erreur="erreur";
     }else{
       $description=$_POST['description'];
     }
     if( !isset($erreur)){
-
+		  Ajouter_projet::ajouterProjet($nom,$email,$description,$titre);
+		  $erreur='';
     }
+  }else{
+	  $erreur="";
   }
-<<<<<<< HEAD
-=======
-  else {$erreur="";}
->>>>>>> 1dfaf339264fd012103e7692f836072a51116627
+  
+  
+
 
  ?>
 
