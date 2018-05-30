@@ -54,7 +54,7 @@
               Projet tuteuré
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="add_projet_tut.php">
                 Ajouter un projet tuteuré
               </a>
               <a class="dropdown-item" href="#">
