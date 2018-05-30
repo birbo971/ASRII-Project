@@ -2,3 +2,25 @@ Bleu : #00B2CC
 vert : #AFCA01
 orange : #F59000
 violet : #B2579D
+
+Navbar :
+Fond clair
+Logo à gauche
+Lien actif en bleu
+Lien non actif en gris
+Le premier dropdown s'affiche en dessous
+Le second dropdown s'affiche à droite
+
+h1 :
+Texte en bleu
+Suivit d'un grand hr
+
+h2 :
+Texte en violet
+
+h3 :
+Texte en orange
+
+Footer :
+Fond foncé
+Texte en blanc
