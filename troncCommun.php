@@ -6,6 +6,7 @@ $presentation="active";
 <?php include('includes/navbar.php'); ?>
 <div class="container">
   <h1>Tronc commun</h1>
+  <hr>
 
   <h2>UE 1 – COMMUNICATION ET CONNAISSANCE DE L’ENTREPRISE (112 H)</h2>
   <h3>Technique de Recherche d’emploi et Communication</h3>

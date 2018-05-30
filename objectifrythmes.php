@@ -6,9 +6,8 @@ include('includes/header.php'); ?>
 <?php include('includes/navbar.php'); ?>
 <div class="container">
   <h1>Licence Pro Métiers de l'Informatique : Application Web</h1>
-    <hr>
-  <br/>
-  <p class="h3" id="Objectif">Objectifs de la formation <i class="fas fa-star"></i></p>
+  <hr>
+  <h2 class="center">Objectifs de la formation <i class="fas fa-star"></i></h2>
   <hr class="hrmoyen">
     <p class="lead text-center">Former des jeunes de niveau BAC+2 aux métiers de l’Internet et de responsable informatique chargé de la gestion d’un réseau local et du développement et déploiement de produits et de services Intranet ou / et Internet.
       Les postes visés sont intermédiaires entre des techniciens supérieurs et des ingénieurs,principalement, orientés vers les PME/PMI.</p>
@@ -22,7 +21,7 @@ include('includes/header.php'); ?>
       <p class="text-center"><li>Développer des applications WEB après avoir défini avec le client les besoins et le cahier des charges.</li></p>
       <p class="text-center"><li>Intégrer des services et des applications Web aussi bien pour un Intranet que pour l’Internet.</li></p></ol>
     <br/>
-  <p class="h3" id="Rythme">Rythme de la licence <i class="fas fa-clipboard-list"></i></p>
+  <h2 class="center">Rythme de la licence <i class="fas fa-clipboard-list"></i></h2>
   <hr class="hrmoyen">
     <p class="lead">Octobre, novembre et décembre : une semaine sur deux en entreprise</li></p>
 <p class="lead"><li>De janvier à mai : deux semaines successives par mois</p>

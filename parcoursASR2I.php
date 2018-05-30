@@ -6,6 +6,7 @@ $presentation="active";
 <?php include('includes/navbar.php'); ?>
 <div class="container">
   <h1>Tronc commun</h1>
+  <hr>
   <h2>UE 4 - ADMINISTRATION ET SECURISATION DES RESEAUX ET SERVICES INTRANET ET INTERNET (196 H)</h2>
   <h3>Interconnexion de réseaux, routage</h3>
   <h4>Objectifs :</h4>
