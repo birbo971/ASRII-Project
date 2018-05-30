@@ -35,3 +35,16 @@ and (max-width : 320px) {
 .navfooter{
   margin-top: 50px;
 }
+
+h1 {
+  color: #00B2CC;
+  margin-top: 20px;
+}
+
+h2 {
+  margin-top: 50px;
+}
+
+li {
+  list-style-type: none;
+}
