@@ -1,5 +1,5 @@
 <?php
-$title="Ajouter un projet tuteuré";
+$titre="Ajouter un projet tuteuré";
   include('/includes/header.php');
   include('includes/navbar.php');
   if( $_POST){
@@ -22,7 +22,7 @@ $title="Ajouter un projet tuteuré";
     }else{
       $titre=$_POST['titre'];
     }
-    
+
     if( empty($_POST['description'])){
       $erreur="erreur";
     }else{
@@ -32,6 +32,7 @@ $title="Ajouter un projet tuteuré";
 
     }
   }
+  else {$erreur="";}
 
  ?>
 
