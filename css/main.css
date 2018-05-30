@@ -48,3 +48,7 @@ h2 {
 li {
   list-style-type: none;
 }
+
+footer {
+  margin-top: 100px;
+}
