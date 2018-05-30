@@ -72,28 +72,7 @@
         </li>
 
         <!-- Espace étudiant -->
-        <li class="nav-item dropdown <?= isset($etudiant)? $etudiant: ''; ?>">
-          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Espace étudiant
-          </a>
-          <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">
-              Notes
-            </a>
-            <a class="dropdown-item" href="#">
-              Emploi du temps
-            </a>
-            <a class="dropdown-item" href="#">
-              Projets tuteurés
-            </a>
-            <a class="dropdown-item" href="#">
-              Offres d'alternance
-            </a>
-            <a class="dropdown-item" href="#">
-              Support de cours
-            </a>
-          </div>
-        </li>
+        <?php barMenu(); ?>
 
         <!-- Espace enseignant -->
         <li class="nav-item dropdown <?= isset($enseignant)? $enseignant: ''; ?>">

@@ -1,10 +1,8 @@
 <?php
-<<<<<<< HEAD
 $title="Ajouter un projet tuteuré";
-=======
 $titre="Ajouter un projet tuteuré";
->>>>>>> 1dfaf339264fd012103e7692f836072a51116627
-  include('/includes/header.php');
+
+  include('includes/header.php');
   include('includes/navbar.php');
   if( $_POST){
 
@@ -26,11 +24,6 @@ $titre="Ajouter un projet tuteuré";
     }else{
       $titre=$_POST['titre'];
     }
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> 1dfaf339264fd012103e7692f836072a51116627
     if( empty($_POST['description'])){
       $erreur="erreur";
     }else{
@@ -40,10 +33,9 @@ $titre="Ajouter un projet tuteuré";
 
     }
   }
-<<<<<<< HEAD
-=======
+
+
   else {$erreur="";}
->>>>>>> 1dfaf339264fd012103e7692f836072a51116627
 
  ?>
 
@@ -129,3 +121,4 @@ border-top: 1px solid blue;
   </div>
 
 </div>
+<?php include('includes/footer.php'); ?>
