@@ -58,3 +58,7 @@ li {
 footer {
   margin-top: 100px;
 }
+
+.navbar-light .navbar-nav .nav-link.active {
+  color: #00B2CC;
+}
