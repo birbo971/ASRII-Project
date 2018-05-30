@@ -9,18 +9,17 @@
 
         <!-- Accueil -->
         <li class="nav-item">
-          <a class="nav-link active" href="index.php">
+          <a class="nav-link <?= isset($accueil)? $accueil: ''; ?>" href="index.php">
             Accueil
           </a>
         </li>
 
         <!-- Présentation de la licence -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item dropdown <?= isset($presentation)? $presentation: ''; ?>">
+          <a class="nav-link dropdown-toggle " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Présentation de la licence
           </a>
           <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
-
             <a class="dropdown-item" href="objectifrythmes.php">
               Objectifs et rythme
             </a>
@@ -42,7 +41,7 @@
         </li>
 
         <!-- Espace entreprise -->
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown <?= isset($entreprise)? $entreprise: ''; ?>">
           <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Espace entreprise
           </a>
@@ -51,7 +50,7 @@
               Projet tuteuré
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="add_projet_tut.php">
                 Ajouter un projet tuteuré
               </a>
               <a class="dropdown-item" href="#">
@@ -73,7 +72,7 @@
         </li>
 
         <!-- Espace étudiant -->
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown <?= isset($etudiant)? $etudiant: ''; ?>">
           <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Espace étudiant
           </a>
@@ -97,7 +96,7 @@
         </li>
 
         <!-- Espace enseignant -->
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown <?= isset($enseignant)? $enseignant: ''; ?>">
           <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Espace enseignant
           </a>

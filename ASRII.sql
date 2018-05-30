@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Lun 28 Mai 2018 à 09:40
+-- Généré le :  Mer 30 Mai 2018 à 08:08
 -- Version du serveur :  5.6.20-log
 -- Version de PHP :  5.4.31
 
@@ -17,9 +17,29 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données :  `ASRII`
+-- Base de données :  `asrii`
 --
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ajout_projet`
+--
+
+CREATE TABLE IF NOT EXISTS `ajout_projet` (
+`id` int(11) NOT NULL,
+  `nom` varchar(255) DEFAULT NULL,
+  `email` text,
+  `titre` varchar(255) DEFAULT NULL,
+  `description` text,
+  `etat` enum('en attente','refuse','valide','') NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+
+-- Index pour la table `ajout_projet`
+--
+ALTER TABLE `ajout_projet`
+ ADD PRIMARY KEY (`id`);
 -- --------------------------------------------------------
 
 --
@@ -83,6 +103,7 @@ CREATE TABLE IF NOT EXISTS `personnel miaw` (
 -- Index pour les tables exportées
 --
 
+
 --
 -- Index pour la table `enseignant`
 --
@@ -111,6 +132,11 @@ ALTER TABLE `personnel miaw`
 -- AUTO_INCREMENT pour les tables exportées
 --
 
+--
+-- AUTO_INCREMENT pour la table `ajout_projet`
+--
+ALTER TABLE `ajout_projet`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `enseignant`
 --
