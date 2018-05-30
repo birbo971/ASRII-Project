@@ -42,7 +42,13 @@ h1 {
 }
 
 h2 {
+  color: #B2579D;
   margin-top: 50px;
+}
+
+h3 {
+  color: #F59000;
+  margin-top: 20px;
 }
 
 li {
