@@ -7,7 +7,7 @@ $accueil="active";
 <div class="container center">
   <h1>Accueil</h1>
 
-  <h2>Metiers Vises</h2>
+  <h2>Metiers Vises <i class="fas fa-bullseye"></i></h2>
   Les postes visés sont intermédiaires entre des techniciens supérieurs et des ingénieurs, principalement, orientés vers les PME/PMI :
   <br><br>
   <ul>
@@ -20,13 +20,13 @@ $accueil="active";
     <li>Responsable informatique.</li>
   </ul>
 
-  <h2>Pre-requis</h2>
+  <h2>Pre-requis <i class="fas fa-check-circle"></i></h2>
   Etre titulaire d’un BAC + 2 (DUT, L2, BTS, DEUST).
   <br><br>
   La sélection se fait sur dossier, tests de connaissances, et éventuellement entretien
   <br>
 
-  <h2>Contact</h2>
+  <h2>Contact <i class="fas fa-phone"></i></h2>
   IUT d'Evry Val d'Essonne - Département G.E.I.I.
   <br>
   Cours Monseigneur Roméro 91000 EVRY
