@@ -1,5 +1,5 @@
 <?php
-require 'DB.php';
+
 class Ajouter_projet
 {
     public static function  ajouterProjet($nom, $email, $titre, $desc)

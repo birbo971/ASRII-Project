@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 function barMenu(){
 session_unset();
 if(empty($_SESSION['NouvelleSession'])){
@@ -6,7 +8,7 @@ if(empty($_SESSION['NouvelleSession'])){
 ?>
   <li class="nav-item"><a class="nav-link <?= isset($etudiant)? $etudiant: ''; ?>" href="authespaceetudiant.php">Espace Etudiant</a></li>
 <?php
-}elseif(!empty($_SESSION['NouvelleSession'])){
+}else{
 ?>
   <li class="nav-item dropdown <?= isset($etudiant)? $etudiant: ''; ?>">
     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -34,7 +36,6 @@ if(empty($_SESSION['NouvelleSession'])){
 }
 
 include('includes/DB.php');
-session_start();
 function connexionEspaceEtud(){
   $pdo = DB::get();
   if(isset($_POST['connexion'])){

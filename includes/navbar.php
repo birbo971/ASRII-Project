@@ -107,7 +107,10 @@
             </div>
           </div>
         </li>
-
+        <!--Connexion-->
+        <li class="nav-item dropdown <?= isset($enseignant)? $enseignant: ''; ?>">
+          <a class="nav-link">Connexion</a>
+          </li>
       </ul>
     </div>
   </div>
