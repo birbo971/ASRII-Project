@@ -1,24 +1,19 @@
 <?php
 $title="Ajouter un projet tuteuré";
 $titre="Ajouter un projet tuteuré";
-
   include('includes/header.php');
   include('includes/navbar.php');
   if( $_POST){
-
     if( empty($_POST['email'])){
-
       $erreur="erreur";
     }else{
       $email=$_POST['email'];
     }
-
     if( empty($_POST['nom'])){
       $erreur="erreur";
     }else{
       $nom=$_POST['nom'];
     }
-
     if( empty($_POST['titre'])){
       $erreur="erreur";
     }else{
@@ -30,13 +25,9 @@ $titre="Ajouter un projet tuteuré";
       $description=$_POST['description'];
     }
     if( !isset($erreur)){
-
     }
   }
-
-
   else {$erreur="";}
-
  ?>
 
 <style>
@@ -47,13 +38,11 @@ $titre="Ajouter un projet tuteuré";
 .erreur{
   border:1px solid red;
 }
-
 div.bordure-horizontal {
 margin:10px;
 border-top: 1px solid blue;
 }
 .erreur-haut{
-
   padding:2px 2px 0 2px;
   border:2px solid red;
   -webkit-border-radius: 15px;
@@ -64,14 +53,10 @@ border-top: 1px solid blue;
 <div class="container">
 
   <div class="col-sm-12">
-<?php if($erreur){ ?>
-        <div class="margin-centrer erreur-haut" >
-          <p>Tous les champs ne sont pas correctement remplies</p>
-        </div>
-<?php  } ?>
-    <h2>
+
+    <h1>
       Vous êtes une entreprise et vous souhaitez nous soumettre votre projet ?
-    </h2>
+    </h1>
 </br>
 
   <p style="font-weight:bold;">
@@ -117,7 +102,11 @@ border-top: 1px solid blue;
      </div>
    </div>
   </form>
-
+  <?php if($erreur){ ?>
+          <br/><div class="alert alert-danger" role="alert">
+            <p>Tous les champs ne sont pas correctement remplies</p>
+          </div>
+  <?php  } ?>
   </div>
 
 </div>

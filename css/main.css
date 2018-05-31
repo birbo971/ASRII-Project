@@ -63,3 +63,7 @@ footer {
 .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .active > .nav-link {
   color: #00B2CC;
 }
+.contentcenter{
+  margin-left: auto;
+  margin-right:auto;
+}
