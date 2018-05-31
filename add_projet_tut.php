@@ -1,8 +1,7 @@
 <?php
-$title="Ajouter un projet tuteuré";
 $titre="Ajouter un projet tuteuré";
-
-  include('includes/header.php');
+ require('/includes/Ajouter_projet.php');
+  include('/includes/header.php');
   include('includes/navbar.php');
   if( $_POST){
 
@@ -19,23 +18,27 @@ $titre="Ajouter un projet tuteuré";
       $nom=$_POST['nom'];
     }
 
-    if( empty($_POST['titre'])){
+    if( empty($_POST['title'])){
       $erreur="erreur";
     }else{
-      $titre=$_POST['titre'];
+      $title=$_POST['title'];
     }
+
     if( empty($_POST['description'])){
       $erreur="erreur";
     }else{
       $description=$_POST['description'];
     }
     if( !isset($erreur)){
-
+		  Ajouter_projet::ajouterProjet($nom,$email,$description,$title);
+		  $erreur='';
     }
+  }else{
+	  $erreur="";
   }
 
 
-  else {$erreur="";}
+
 
  ?>
 
@@ -50,7 +53,7 @@ $titre="Ajouter un projet tuteuré";
 
 div.bordure-horizontal {
 margin:10px;
-border-top: 1px solid blue;
+border-top: 1px solid #00B2CC;
 }
 .erreur-haut{
 
@@ -60,18 +63,21 @@ border-top: 1px solid blue;
   -moz-border-radius: 15px;
   border-radius: 15px;
 }
+.color-blue{
+color:#00B2CC;
+}
 </style>
-<div class="container">
+ <div class="container" style="margin-bottom:60px;">
 
   <div class="col-sm-12">
 <?php if($erreur){ ?>
-        <div class="margin-centrer erreur-haut" >
+        <div class="margin-centrer erreur-haut"  >
           <p>Tous les champs ne sont pas correctement remplies</p>
         </div>
 <?php  } ?>
-    <h2>
+    <h1 class="color-blue">
       Vous êtes une entreprise et vous souhaitez nous soumettre votre projet ?
-    </h2>
+    </h1>
 </br>
 
   <p style="font-weight:bold;">
@@ -84,7 +90,7 @@ border-top: 1px solid blue;
   </p>
 
   <div class="bordure-horizontal"> </div>
-  <p class="margin-centrer">Vous pouvez faire appel à nos étudiants et proposez votre projet à notre équipe enseignante.</p>
+  <h2>Vous pouvez faire appel à nos étudiants et proposez votre projet à notre équipe enseignante.</h2>
 <br>
    <form class="form-horizontal col-sm-10 margin-centrer"   action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
      <div class="form-group">
@@ -102,7 +108,7 @@ border-top: 1px solid blue;
    <div class="form-group">
      <label class="control-label" for="titre">Titre projet tuteuré:</label>
      <div class="col-sm-12">
-       <input type="text" class="form-control <?= !isset($titre) ? $erreur: ''; ?>" value="<?= isset($titre) ? $titre: ''; ?>" id="titre"  name="titre" placeholder="Titre projet tuteuré">
+       <input type="text" class="form-control <?= !isset($title) ? $erreur: ''; ?>" value="<?= isset($title) ? $title: ''; ?>" id="title"  name="title" placeholder="Titre projet tuteuré">
      </div>
    </div>
    <div class="form-group">
@@ -121,4 +127,7 @@ border-top: 1px solid blue;
   </div>
 
 </div>
-<?php include('includes/footer.php'); ?>
+<script type="text/javascript">
+  document.getElementById('description').value = '<?= $description ; ?>';
+</script>
+<?php  include('includes/footer.php');
