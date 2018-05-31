@@ -76,3 +76,13 @@ footer {
 .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .active > .nav-link {
   color: #00B2CC;
 }
+
+.fa-facebook-square {
+  color: blue;
+  font-size: 32px;
+}
+
+.fa-youtube {
+  color: red;
+  font-size: 32px;
+}
