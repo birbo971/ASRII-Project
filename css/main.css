@@ -85,4 +85,8 @@ footer {
 .fa-youtube {
   color: red;
   font-size: 32px;
+
+.contentcenter {
+  margin-left: auto;
+  margin-right:auto;
 }
