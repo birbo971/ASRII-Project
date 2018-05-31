@@ -1,20 +1,21 @@
 <?php
 session_start();
-
-function barMenu(){
-session_unset();
-if(empty($_SESSION['NouvelleSession'])){
-  $etudiant = "active";
-?>
-  <li class="nav-item"><a class="nav-link <?= isset($etudiant)? $etudiant: ''; ?>" href="authespaceetudiant.php">Espace Etudiant</a></li>
+function barMenu($etat){
+if(empty($_SESSION['NouvelleSession'])){ ?>
+  <li class="nav-item dropdown <?= isset($authentification)? $authentification: ''; ?>">
+    <a class="nav-link" href="authentification.php">Connexion</a>
+    </li>
 <?php
-}else{
+}elseif($etat == 'etudiant'){
 ?>
   <li class="nav-item dropdown <?= isset($etudiant)? $etudiant: ''; ?>">
     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Espace étudiant
     </a>
     <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
+      <a class="dropdown-item" href="espaceetudiant.php">
+        Mon Espace
+        </a>
       <a class="dropdown-item" href="#">
         Notes
       </a>
@@ -31,6 +32,84 @@ if(empty($_SESSION['NouvelleSession'])){
       </a>
     </div>
   </li>
+  <li class="nav-item">
+    <a class="nav-link <?= isset($deconnexion)? $deconnexion: ''; ?>"  href="deconnexion.php">
+      Deconnexion
+    </a>
+  </li>
+<?php
+}elseif ($etat == 'entreprise') { ?>
+      <li class="nav-item dropdown <?= isset($entreprise)? $entreprise: ''; ?>">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Espace entreprise
+        </a>
+        <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Projet tuteuré
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="add_projet_tut.php">
+              Ajouter un projet tuteuré
+            </a>
+            <a class="dropdown-item" href="#">
+              Consulter ses projets tuteurés
+            </a>
+          </div>
+          <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Offre d'alternance
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">
+              Ajouter une offre d'alternance
+            </a>
+            <a class="dropdown-item" href="#">
+              Consulter ses offres d'alternances
+            </a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link <?= isset($deconnexion)? $deconnexion: ''; ?>" href="deconnexion.php">
+          Deconnexion
+        </a>
+      </li>
+<?php
+}elseif($etat == 'enseignant'){ ?>
+  <li class="nav-item dropdown <?= isset($enseignant)? $enseignant: ''; ?>">
+    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Espace enseignant
+    </a>
+    <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
+      <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Notes
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="#">
+          Ajouter une note
+        </a>
+        <a class="dropdown-item" href="#">
+          Consulter ses notes déposées
+        </a>
+      </div>
+      <a class="dropdown-item" href="#">
+        Emploi du temps personnel
+      </a>
+      <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Support de cours
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="#">
+          Ajouter un support de cours
+        </a>
+        <a class="dropdown-item" href="#">
+          Consulter ses supports de cours
+        </a>
+      </div>
+    </div>
+  </li>
+  <a class="nav-link <?= isset($deconnexion)? $deconnexion: ''; ?>"  href="deconnexion.php">
+    Deconnexion
+  </a>
 <?php
   }
 }
@@ -39,22 +118,38 @@ include('includes/DB.php');
 function connexionEspaceEtud(){
   $pdo = DB::get();
   if(isset($_POST['connexion'])){
-      if(!empty($_POST['emailEtudiant']) && !empty($_POST['motdepasseEtudiant'])){
-      $Email_Etudiant = $_POST['emailEtudiant'];
-      $Motdepasse_Etudiant = $_POST['motdepasseEtudiant'];
-      $req = $pdo->prepare("SELECT * FROM `etudiant` WHERE  email=:emailEtudiant AND mdp=:motdepasseEtudiant");
-      $req->execute(array(':emailEtudiant'=>$Email_Etudiant,
-                          ':motdepasseEtudiant'=>$Motdepasse_Etudiant));
-      $nb = $req->rowCount();
-                      if($nb!=0){  echo'<br/><div class="col-sm-8 text-center contentcenter"><div class="alert alert-success" role="alert">
-                        Vous avez bien été connecter ! Vous allez être rediriger dans 3 secondes.
-                    </div></div>';
-                    $_SESSION['NouvelleSession'] = $Email_Etudiant;
-                  }else{
+      if(!empty($_POST['email']) && !empty($_POST['motdepasse'])){
+      $Email= $_POST['email'];
+      $Motdepasse= $_POST['motdepasse'];
+      $req = $pdo->prepare("SELECT * FROM `utilisateurs` WHERE  email=:email AND mdp=:motdepasse");
+      $req->execute(array(':email'=>$Email,
+                          ':motdepasse'=>$Motdepasse));
+      if($nb = $req->fetch()){
+        $_SESSION['NouvelleSession'] = $nb['email'];
+        $_SESSION['etat'] = $nb['etat'];
+        if($_SESSION['etat'] == 'etudiant'){
+        echo'<br/><div class="col-sm-8 text-center contentcenter"><div class="alert alert-success" role="alert">
+         Vous avez bien été connecter ! Vous allez être rediriger dans 3 secondes.
+     </div></div>';
+        ?><script type='text/javascript'>
+        window.setTimeout('location=("espaceetudiant.php");',3000);
+        </script>
+        <?php
+        }elseif($_SESSION['etat'] == "enseignant"){
+       echo'<br/><div class="col-sm-8 text-center contentcenter"><div class="alert alert-success" role="alert">
+        Vous avez bien été connecter ! Vous allez être rediriger dans 3 secondes.
+    </div></div>'; ?>
+        <script type='text/javascript'>
+    window.setTimeout('location=("espaceenseignant.php");',3000);
+    </script><?php
+     }
+        ?>
+        <?php
+      }else{
                     echo"<br/><div class='col-sm-8 text-center contentcenter'><div class='alert alert-warning' role='alert'>
                       Vous n'existez pas dans la base !
                   </div></div>";
-                  }
+                }
                 }else{
       echo'<br/><div class="col-sm-8 text-center contentcenter"><div class="alert alert-danger" role="alert">
     Tout les champs dovent etre remplis !
@@ -62,5 +157,28 @@ function connexionEspaceEtud(){
     }
   }
 }
+function deconnexion(){
+  session_unset ();
+  session_destroy();
+  ?><br/>
+  <div class="col-sm-8 text-center contentcenter">
+  <div class="alert alert-info" role="alert">
+  Vous êtes à présent déconnecté, et serez rediriger dans 2 secondes
+  </div>
+</div>
+  <script type='text/javascript'>
+window.setTimeout('location=("authentification.php");',2000);
+</script>
 
+<?php
+}
+function ifIsConnected(){
+  if(!empty($_SESSION['etat']) && $_SESSION['etat'] == "enseignant"){
+  }elseif(!empty($_SESSION['etat']) && $_SESSION['etat'] == "etudiant"){
+  }elseif(!empty($_SESSION['etat']) && $_SESSION['etat'] == "entreprise"){
+  }elseif(!empty($_SESSION['etat']) && $_SESSION['etat'] == "personnel miaw") {
+  }else{
+    header("location:authentification.php");
+  }
+}
 ?>
