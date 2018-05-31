@@ -45,9 +45,22 @@
 if(!empty($_SESSION['etat'])){
          barMenu($_SESSION['etat']);
 }else{?>
+  <li class="nav-item dropdown <?= isset($entreprise)? $entreprise: ''; ?>">
+    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Espace entreprise
+    </a>
+    <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
+      <a class="dropdown-item" href="add_projet_tut.php">
+        Ajouter un projet
+      </a>
+      <a class="dropdown-item" href="add_stage.php">
+        Ajouter des offres d'alternances
+      </a>
+    </li>
   <li class="nav-item dropdown <?= isset($authentification)? $authentification: ''; ?>">
     <a class="nav-link" href="authentification.php">Connexion</a>
     </li>
+  </div>
 <?php
 }
 ?>
