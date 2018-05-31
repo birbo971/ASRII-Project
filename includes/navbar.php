@@ -40,77 +40,16 @@
           </div>
         </li>
 
-        <!-- Espace entreprise -->
-        <li class="nav-item dropdown <?= isset($entreprise)? $entreprise: ''; ?>">
-          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Espace entreprise
-          </a>
-          <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Projet tuteuré
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="add_projet_tut.php">
-                Ajouter un projet tuteuré
-              </a>
-              <a class="dropdown-item" href="#">
-                Consulter ses projets tuteurés
-              </a>
-            </div>
-            <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Offre d'alternance
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">
-                Ajouter une offre d'alternance
-              </a>
-              <a class="dropdown-item" href="#">
-                Consulter ses offres d'alternances
-              </a>
-            </div>
-          </div>
-        </li>
+    <!-- Espace entreprise -->
+<?php
+if(!empty($_SESSION['etat'])){
+         barMenu($_SESSION['etat']);
+}else{
 
-        <!-- Espace étudiant -->
-        <?php barMenu(); ?>
-
-        <!-- Espace enseignant -->
-        <li class="nav-item dropdown <?= isset($enseignant)? $enseignant: ''; ?>">
-          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Espace enseignant
-          </a>
-          <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Notes
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">
-                Ajouter une note
-              </a>
-              <a class="dropdown-item" href="#">
-                Consulter ses notes déposées
-              </a>
-            </div>
-            <a class="dropdown-item" href="#">
-              Emploi du temps personnel
-            </a>
-            <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Support de cours
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">
-                Ajouter un support de cours
-              </a>
-              <a class="dropdown-item" href="#">
-                Consulter ses supports de cours
-              </a>
-            </div>
-          </div>
-        </li>
+}
+?>
+        <!-- Deconnexion -->
         <!--Connexion-->
-        <li class="nav-item dropdown <?= isset($enseignant)? $enseignant: ''; ?>">
-          <a class="nav-link">Connexion</a>
-          </li>
       </ul>
     </div>
   </div>
