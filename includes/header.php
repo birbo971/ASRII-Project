@@ -6,6 +6,7 @@
     <title><?php echo $titre; ?></title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link href="css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="css/bootstrap-social.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/main.css">
   </head>
   <body>

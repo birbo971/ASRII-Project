@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md bg-light navbar-light">
+<nav class="navbar fixed-top navbar-expand-md bg-light navbar-light">
   <div class="container">
     <img src="img/logo.png" alt="logo" class="logo">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
