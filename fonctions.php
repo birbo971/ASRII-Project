@@ -2,9 +2,6 @@
 session_start();
 function barMenu($etat){
 if(empty($_SESSION['NouvelleSession'])){ ?>
-  <li class="nav-item dropdown <?= isset($authentification)? $authentification: ''; ?>">
-    <a class="nav-link" href="authentification.php">Connexion</a>
-    </li>
 <?php
 }elseif($etat == 'etudiant'){
 ?>

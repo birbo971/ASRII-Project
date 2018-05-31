@@ -40,12 +40,15 @@
           </div>
         </li>
 
-    <!-- Espace entreprise -->
+    <!-- Les différents Espaces selon l'état -->
 <?php
 if(!empty($_SESSION['etat'])){
          barMenu($_SESSION['etat']);
-}else{
-
+}else{?>
+  <li class="nav-item dropdown <?= isset($authentification)? $authentification: ''; ?>">
+    <a class="nav-link" href="authentification.php">Connexion</a>
+    </li>
+<?php
 }
 ?>
         <!-- Deconnexion -->
