@@ -9,7 +9,7 @@ class DB
            try
            {
                self::$instance = new PDO('mysql:host=localhost;dbname=asrii', 'root', 'root');
-           } 
+           }
            catch(PDOException $e)
            {
                // Handle this properly

@@ -1,9 +1,9 @@
 <?php
 $titre ="Espace Etudiant";
 include('includes/header.php'); ?>
-<?php include('includes/navbar.php'); ?>
+<?php include('includes/navbar.php');?>
 <div class="container">
-  <h1>Authentification de l'étudiant</h1>
+  <h1>Authentification</h1>
     <hr>
     <br/>
   <form class="form" action="authespaceetudiant.php" method="post">
