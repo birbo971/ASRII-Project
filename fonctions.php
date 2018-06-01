@@ -196,19 +196,21 @@ function ifIsConnected(){
 }
 function notes(){
   $pdo= DB::get();
-  $req = $pdo->prepare('SELECT notes,matieres,nom FROM notes,utilisateurs WHERE etat = "enseignant" AND utilisateurs.id_users = notes.id_enseignant AND notes.id_etudiant ='.$_SESSION["id"].' ');
+  $req = $pdo->prepare('SELECT notes,matieres,nom FROM notes,utilisateurs,matieres WHERE etat = "enseignant" AND utilisateurs.id_users = notes.id_enseignant  AND matieres.id_ens = utilisateurs.id_users AND notes.id_etudiant ='.$_SESSION["id"].' ');
   $req->execute();
   $nb = $req->rowCount();
   //tableaux des notes
   if($nb > 0){
   echo'<table class="table">';
+  echo'<thead class="thead-light">';
   echo'<tr><th>Matière</th>
       <th>Notes</th>
       <th>Enseignants</th>';
+  echo'</thead><tbody>';
   while($row = $req->fetch()){
       echo'<tr><td>'.$row['matieres'].'</td><td>'.$row['notes'].'</td><td>'.$row['nom'].'</td></tr>';
   }
-      echo'</table>';
+      echo'</tbody></table>';
   }else{
     echo"Aucune notes dans la base.";
   }
