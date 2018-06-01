@@ -196,16 +196,17 @@ function ifIsConnected(){
 }
 function notes(){
   $pdo= DB::get();
-  $req = $pdo->prepare('SELECT notes,matieres FROM notes,utilisateurs WHERE notes.id_etudiant = utilisateurs.id_users AND notes.id_etudiant ='.$_SESSION["id"].'');
+  $req = $pdo->prepare('SELECT notes,matieres,nom FROM notes,utilisateurs WHERE etat = "enseignant" AND utilisateurs.id_users = notes.id_enseignant AND notes.id_etudiant ='.$_SESSION["id"].' ');
   $req->execute();
   $nb = $req->rowCount();
   //tableaux des notes
   if($nb > 0){
   echo'<table class="table">';
   echo'<tr><th>Matière</th>
-      <th>Notes</th></tr>';
+      <th>Notes</th>
+      <th>Enseignants</th>';
   while($row = $req->fetch()){
-      echo'<tr><td>'.$row['matieres'].'</td><td>'.$row['notes'].'</td></tr>';
+      echo'<tr><td>'.$row['matieres'].'</td><td>'.$row['notes'].'</td><td>'.$row['nom'].'</td></tr>';
   }
       echo'</table>';
   }else{
