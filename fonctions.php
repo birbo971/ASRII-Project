@@ -125,6 +125,7 @@ function connexionEspaceEtud(){
       $req->execute(array(':email'=>$Email,
                           ':motdepasse'=>$Motdepasse));
       if($nb = $req->fetch()){
+        $_SESSION['id'] = $nb['id_users'];
         $_SESSION['NouvelleSession'] = $nb['email'];
         $_SESSION['etat'] = $nb['etat'];
         if($_SESSION['etat'] == 'etudiant'){
@@ -179,6 +180,24 @@ function ifIsConnected(){
   }elseif(!empty($_SESSION['etat']) && $_SESSION['etat'] == "personnel miaw") {
   }else{
     header("location:authentification.php");
+  }
+}
+function notes(){
+  $pdo= DB::get();
+  $req = $pdo->prepare('SELECT notes,matieres FROM notes,utilisateurs WHERE notes.id_etudiant = utilisateurs.id_users AND notes.id_etudiant ='.$_SESSION["id"].'');
+  $req->execute();
+  $nb = $req->rowCount();
+  //tableaux des notes
+  if($nb > 0){
+  echo'<table class="table">';
+  echo'<tr><th>Matière</th>
+      <th>Notes</th></tr>';
+  while($row = $req->fetch()){
+      echo'<tr><td>'.$row['matieres'].'</td><td>'.$row['notes'].'</td></tr>';
+  }
+      echo'</table>';
+  }else{
+    echo"Aucune notes dans la base.";
   }
 }
 ?>
