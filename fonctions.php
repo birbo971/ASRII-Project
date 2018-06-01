@@ -16,10 +16,10 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
       <a class="dropdown-item" href="espaceetudiant.php">
         Mon Espace
         </a>
-      <a class="dropdown-item" href="#">
+      <a class="dropdown-item" href="notes.php">
         Notes
       </a>
-      <a class="dropdown-item" href="#">
+      <a class="dropdown-item" href="emploidutemps.php">
         Emploi du temps
       </a>
       <a class="dropdown-item" href="#">
@@ -98,7 +98,7 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
         </ul>
       </li>
       <li>
-        <a class="dropdown-item" href="#">
+        <a class="dropdown-item" href="emploidutemps.php">
           Emploi du temps personnel
         </a>
       </li>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Jeu 31 Mai 2018 à 14:54
+-- Généré le :  Ven 01 Juin 2018 à 07:42
 -- Version du serveur :  5.6.20-log
 -- Version de PHP :  5.4.31
 
@@ -83,11 +83,22 @@ CREATE TABLE IF NOT EXISTS `entreprise` (
 --
 
 CREATE TABLE IF NOT EXISTS `notes` (
-  `id_user` int(11) NOT NULL,
   `notes` varchar(255) NOT NULL,
-  `matieres` int(11) NOT NULL,
-`id_notes` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `matieres` varchar(255) NOT NULL,
+`id_notes` int(11) NOT NULL,
+  `id_enseignant` int(11) NOT NULL,
+  `id_etudiant` int(11) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Contenu de la table `notes`
+--
+
+INSERT INTO `notes` (`notes`, `matieres`, `id_notes`, `id_enseignant`, `id_etudiant`) VALUES
+('15/20', 'PHP', 1, 3, 1),
+('16/20', 'SQL', 2, 4, 1),
+('11/20', 'JAVA', 3, 5, 1),
+('11/20', 'SHELL', 4, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -117,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `email` varchar(255) NOT NULL,
   `mdp` int(50) NOT NULL,
   `etat` enum('enseignant','entreprise','etudiant','personnel miaw') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Contenu de la table `utilisateurs`
@@ -125,7 +136,10 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
 
 INSERT INTO `utilisateurs` (`id_users`, `nom`, `prenom`, `email`, `mdp`, `etat`) VALUES
 (1, 'Vignal', 'Brice', 'vignal.brice@gmail.com', 200597, 'etudiant'),
-(2, 'Khalifa', 'Djemal', 'khalifa.djemal@gmail.com', 123456, 'enseignant');
+(2, 'Khalifa', 'Djemal', 'khalifa.djemal@gmail.com', 123456, 'enseignant'),
+(3, 'Renard', 'Vincent', 'vincent.renard@ac-versailles.fr ', 6789, 'enseignant'),
+(4, 'DELPLACE ', 'Benoit', 'benoit.delplace@edf.fr ', 789123, 'enseignant'),
+(5, 'Mollica', 'Alain', 'alain.mollica@gmail.com ', 123, 'enseignant');
 
 --
 -- Index pour les tables exportées
@@ -196,7 +210,7 @@ MODIFY `id_entr` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT pour la table `notes`
 --
 ALTER TABLE `notes`
-MODIFY `id_notes` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_notes` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `personnel miaw`
 --
@@ -206,7 +220,7 @@ MODIFY `id_pers` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
