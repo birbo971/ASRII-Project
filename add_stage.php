@@ -38,7 +38,12 @@
        echo $experience;
      }
      if( !isset($erreur)){
- 		  Ajouter_projet::ajouter_stage($nom,$email,$title,$description,$experience);
+       if( !empty($_SESSION['etat'])){
+         Ajouter_projet::ajouter_stage($nom,$email,$title,$description,$experience,$_SESSION['id']);
+       }else{
+         Ajouter_projet::ajouter_stage($nom,$email,$title,$description,$experience,null);
+
+       }
  		  $erreur='';
      }
    }else{

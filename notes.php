@@ -12,7 +12,7 @@ ifIsConnected();
   <div class="container">
     <h1>Mes Notes</h1>
     <br/>
-    <?php notes(); ?>
+    <?php notesEtudiant(); ?>
   </div>
 <?php
 include('includes/footer.php');
