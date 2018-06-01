@@ -233,12 +233,12 @@ function edtEtudiant(){
     <th>jeudi</th>
     <th>Vendredi</th></tr>';
     echo'</thead><tbody>';
-    echo'<tr><th>9h00</th></tr>';
-    echo'<tr><th>13h00</th></tr>';
-    echo'<tr><th>14h00</th></tr>';
-    echo'<tr><th>18h00</th></tr>';
+    echo'<tr><th>9h00</th>';
+    echo'<th>13h00</th>';
+    echo'<th>14h00</th>';
+    echo'<th>18h00</th>';
       while( $row = $req->fetch()){
-        echo'<tr><td>'.$row['plage_horaire'].'</td><td>'.$row['matieres'].'</td><td>'.$row['nom'].'</td></tr>';
+        echo'<td>'.$row['plage_horaire'].'</td><td>'.$row['matieres'].'</td><td>'.$row['nom'].'</td></tr>';
       }
       echo'</tbody></table>';
   }else{
