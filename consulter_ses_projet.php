@@ -31,5 +31,26 @@ border-top: 1px solid #00B2CC;
 color:#00B2CC;
 }
 </style>
- 
+<?php $test = Ajouter_projet::getProjetEntreprise($_SESSION['id']); ?>
+<div class="container">
+  <h1>Vos projets</h1>
+
+    <hr>
+    <br/>
+    <?php
+    while ($res = $test->fetch()){
+      echo'<table class="table table-bordered">';
+      echo'<thead class="thead-dark">';
+      echo'<tr><th>Titre</th>';
+      echo'<th>Description</th>';
+      echo'<th>Etat</th></tr>';
+      echo'</thead><tbody>';
+      echo'<tr><td>'.$res['titre'].'</td><td>'.$res['description'].'</td><td>'.$res['etat'].'</td></tr>';
+      echo'</tbody></table>';
+    } ?>
+  <hr>
+</div>
+
+
+
 <?php  include('includes/footer.php');

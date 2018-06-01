@@ -64,7 +64,7 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
             <a class="dropdown-item" href="add_stage.php">
               Ajouter une offre d'alternance
             </a>
-            <a class="dropdown-item" href="consulter_ses_projet.php">
+            <a class="dropdown-item" href="consulter_ses_stage.php">
               Consulter ses offres d'alternances
             </a>
           </div>
