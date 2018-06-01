@@ -8,13 +8,36 @@ $titre ="Espace Enseignant";
 ifIsConnected();
 ?>
 <!--Content-->
-<div class="container">
+<div class="container center">
   <h1>Espace Enseignant</h1>
   <hr>
-  <br/>
-  <li><a href="">Acceder à ses notes.</a>&nbsp;<i class="fas fa-edit"></i></li><br/>
-  <li><a href="">Acceder à l'emploi du temps personnel.</a>&nbsp;<i class="fas fa-newspaper"></i></li><br/>
-  <li><a href="">Acceder au support de cours.</a>&nbsp;<i class="fas fa-project-diagram"></i></li>
+  <h2>Notes <i class="fas fa-edit"></i></h2>
+  <hr class="hrmoyen"/>
+  <ul>
+    <li>
+      <a href="">Ajouter une note.</a>
+    </li>
+    <li>
+      <a href="">Consulter ses notes déposées.</a>
+    </li>
+  </ul>
+  <h2>Emploi du temp personnel <i class="fas fa-newspaper"></i></h2>
+  <hr class="hrmoyen"/>
+  <ul>
+    <li>
+      <a href="">Acceder à l'emploi du temps personnel.</a>
+    </li>
+  </ul>
+  <h2>Support de cours <i class="fas fa-copy"></i></h2>
+  <hr class="hrmoyen"/>
+  <ul>
+    <li>
+      <a href="">Ajouter un support de cours.</a>
+    </li>
+    <li>
+      <a href="">Consulter ses supports de cours.</a>
+    </li>
+  </ul>
 </div>
 
 
