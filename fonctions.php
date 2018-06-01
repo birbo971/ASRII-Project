@@ -6,100 +6,68 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
     <a class="nav-link" href="authentification.php">Connexion</a>
     </li>
 <?php
-}elseif($etat == 'etudiant'){
+}else{
+  if($etat == 'etudiant'  or $etat == 'personnel miaw'){
 ?>
   <li class="nav-item dropdown <?= isset($etudiant)? $etudiant: ''; ?>">
     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Espace étudiant
     </a>
-    <ul class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
-      <li>
-        <a class="dropdown-item" href="espaceetudiant.php">
-          Mon Espace
+    <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
+      <a class="dropdown-item" href="espaceetudiant.php">
+        Mon Espace
         </a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="notes.php">
-          Notes
-        </a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="emploidutemps.php">
-          Emploi du temps
-        </a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="#">
-          Projets tuteurés
-        </a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="#">
-          Offres d/alternance
-        </a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="#">
-          Support de cours
-        </a>
-      </li>
-    </ul>
+      <a class="dropdown-item" href="notes.php">
+        Notes
+      </a>
+      <a class="dropdown-item" href="emploidutemps.php">
+        Emploi du temps
+      </a>
+      <a class="dropdown-item" href="#">
+        Projets tuteurés
+      </a>
+      <a class="dropdown-item" href="#">
+        Offres d/alternance</a>
+      <a class="dropdown-item" href="#">
+        Support de cours
+      </a>
+    </div>
   </li>
-  <li class="nav-item">
-    <a class="nav-link <?= isset($deconnexion)? $deconnexion: ''; ?>"  href="deconnexion.php">
-      Deconnexion
-    </a>
-  </li>
+
 <?php
-}elseif ($etat == 'entreprise') { ?>
+}if ($etat == 'entreprise' or $etat == 'personnel miaw' ) { ?>
       <li class="nav-item dropdown <?= isset($entreprise)? $entreprise: ''; ?>">
         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Espace entreprise
         </a>
-        <ul class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
-          <li>
-            <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Projet tuteuré
+        <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Projet tuteuré
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="add_projet_tut.php">
+              Ajouter un projet tuteuré
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li>
-                <a class="dropdown-item" href="add_projet_tut.php">
-                  Ajouter un projet tuteuré
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
-                  Consulter ses projets tuteurés
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Offre d'alternance
+            <a class="dropdown-item" href="#">
+              Consulter ses projets tuteurés
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li>
-                <a class="dropdown-item" href="#">
-                  Ajouter une offre d'alternance
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
-                  Consulter ses offres d'alternances
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
+          </div>
+          <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Offre d'alternance
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">
+              Ajouter une offre d'alternance
+            </a>
+            <a class="dropdown-item" href="#">
+              Consulter ses offres d'alternances
+            </a>
+          </div>
+        </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link <?= isset($deconnexion)? $deconnexion: ''; ?>" href="deconnexion.php">
-          Deconnexion
-        </a>
-      </li>
+
 <?php
-}elseif($etat == 'enseignant'){ ?>
+}if($etat == 'enseignant' or $etat == 'personnel miaw'){ ?>
   <li class="nav-item dropdown <?= isset($enseignant)? $enseignant: ''; ?>">
     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Espace enseignant
@@ -142,12 +110,16 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
       </li>
     </ul>
   </li>
-  <li>
-    <a class="nav-link <?= isset($deconnexion)? $deconnexion: ''; ?>"  href="deconnexion.php">
-      Deconnexion
-    </a>
-  </li>
-<?php
+
+    <?php
+    }
+    ?>
+    <li>
+      <a class="nav-link <?= isset($deconnexion)? $deconnexion: ''; ?>"  href="deconnexion.php">
+        Deconnexion
+      </a>
+    </li>
+  <?php
   }
 }
 
@@ -221,21 +193,19 @@ function ifIsConnected(){
 }
 function notes(){
   $pdo= DB::get();
-  $req = $pdo->prepare('SELECT notes,matieres,nom FROM notes,utilisateurs,matieres WHERE etat = "enseignant" AND utilisateurs.id_users = notes.id_enseignant  AND matieres.id_ens = utilisateurs.id_users AND notes.id_etudiant ='.$_SESSION["id"].' ');
+  $req = $pdo->prepare('SELECT notes,matieres,nom FROM notes,utilisateurs WHERE etat = "enseignant" AND utilisateurs.id_users = notes.id_enseignant AND notes.id_etudiant ='.$_SESSION["id"].' ');
   $req->execute();
   $nb = $req->rowCount();
   //tableaux des notes
   if($nb > 0){
   echo'<table class="table">';
-  echo'<thead class="thead-light">';
   echo'<tr><th>Matière</th>
       <th>Notes</th>
       <th>Enseignants</th>';
-  echo'</thead><tbody>';
   while($row = $req->fetch()){
       echo'<tr><td>'.$row['matieres'].'</td><td>'.$row['notes'].'</td><td>'.$row['nom'].'</td></tr>';
   }
-      echo'</tbody></table>';
+      echo'</table>';
   }else{
     echo"Aucune notes dans la base.";
   }

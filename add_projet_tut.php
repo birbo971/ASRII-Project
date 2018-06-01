@@ -30,7 +30,12 @@ $titre="Ajouter un projet tuteuré";
       $description=$_POST['description'];
     }
     if( !isset($erreur)){
-		  Ajouter_projet::ajouterProjet($nom,$email,$description,$title);
+      if( !empty($_SESSION['etat'])){
+         Ajouter_projet::ajouterProjet($nom,$email,$description,$title,$_SESSION['id']);
+      }else{
+        Ajouter_projet::ajouterProjet($nom,$email,$description,$title,null);
+      }
+
 		  $erreur='';
     }
   }else{
