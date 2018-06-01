@@ -19,25 +19,35 @@
           <a class="nav-link dropdown-toggle " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Présentation de la licence
           </a>
-          <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="objectifrythmes.php">
-              Objectifs et rythme
-            </a>
-            <a class="dropdown-item" href="lieu.php">
-              Lieu de formation
-            </a>
-            <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Programme
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="troncCommun.php">
-                Tronc commun
+          <ul class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
+            <li>
+              <a class="dropdown-item" href="objectifrythmes.php">
+                Objectifs et rythme
               </a>
-              <a class="dropdown-item" href="parcoursASR2I.php">
-                Parcours ASR2I
+            </li>
+            <li>
+              <a class="dropdown-item" href="lieu.php">
+                Lieu de formation
               </a>
-            </div>
-          </div>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Programme
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li>
+                  <a class="dropdown-item" href="troncCommun.php">
+                    Tronc commun
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="parcoursASR2I.php">
+                    Parcours ASR2I
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </li>
 
     <!-- Les différents Espaces selon l'état -->
@@ -49,18 +59,22 @@ if(!empty($_SESSION['etat'])){
     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Espace entreprise
     </a>
-    <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
-      <a class="dropdown-item" href="add_projet_tut.php">
-        Ajouter un projet
-      </a>
-      <a class="dropdown-item" href="add_stage.php">
-        Ajouter des offres d'alternances
-      </a>
+    <ul class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
+      <li>
+        <a class="dropdown-item" href="add_projet_tut.php">
+          Ajouter un projet
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" href="add_stage.php">
+          Ajouter des offres d'alternances
+        </a>
+      </li>
     </li>
-  <li class="nav-item dropdown <?= isset($authentification)? $authentification: ''; ?>">
-    <a class="nav-link" href="authentification.php">Connexion</a>
-    </li>
-  </div>
+  </ul>
+<li class="nav-item dropdown <?= isset($authentification)? $authentification: ''; ?>">
+  <a class="nav-link" href="authentification.php">Connexion</a>
+</li>
 <?php
 }
 ?>
