@@ -53,7 +53,7 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
             <a class="dropdown-item" href="add_projet_tut.php">
               Ajouter un projet tuteuré
             </a>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="consulter_ses_projet.php">
               Consulter ses projets tuteurés
             </a>
           </div>
@@ -61,10 +61,10 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
             Offre d'alternance
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="add_stage.php">
               Ajouter une offre d'alternance
             </a>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="consulter_ses_stage.php">
               Consulter ses offres d'alternances
             </a>
           </div>
@@ -205,15 +205,13 @@ function notesEtudiant(){
   //tableaux des notes
   if($nb > 0){
   echo'<table class="table">';
-  echo'<thead class="thead-light">';
   echo'<tr><th>Matière</th>
       <th>Notes</th>
       <th>Enseignants</th>';
-  echo'</thead><tbody>';
   while($row = $req->fetch()){
       echo'<tr><td>'.$row['matieres'].'</td><td>'.$row['notes'].'</td><td>'.$row['nom'].'</td></tr>';
   }
-      echo'</tbody></table>';
+      echo'</table>';
   }else{
     echo"Aucune notes dans la base.";
   }
