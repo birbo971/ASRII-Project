@@ -53,7 +53,7 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
             <a class="dropdown-item" href="add_projet_tut.php">
               Ajouter un projet tuteuré
             </a>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="consulter_ses_projet.php">
               Consulter ses projets tuteurés
             </a>
           </div>
@@ -61,10 +61,10 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
             Offre d'alternance
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="add_stage.php">
               Ajouter une offre d'alternance
             </a>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="consulter_ses_projet.php">
               Consulter ses offres d'alternances
             </a>
           </div>
@@ -205,15 +205,13 @@ function notesEtudiant(){
   //tableaux des notes
   if($nb > 0){
   echo'<table class="table">';
-  echo'<thead class="thead-light">';
   echo'<tr><th>Matière</th>
       <th>Notes</th>
       <th>Enseignants</th>';
-  echo'</thead><tbody>';
   while($row = $req->fetch()){
       echo'<tr><td>'.$row['matieres'].'</td><td>'.$row['notes'].'</td><td>'.$row['nom'].'</td></tr>';
   }
-      echo'</tbody></table>';
+      echo'</table>';
   }else{
     echo"Aucune notes dans la base.";
   }
@@ -228,7 +226,9 @@ function edtEtudiant(){
     echo'<table class="table table-bordered">';
     echo'<thead class="thead-dark">';
     echo'<tr><th>Horaires</th>';
-    echo'<th>Lundi</th><th>Mardi</th>
+    echo'<th>Matieres</th>';
+    echo'<th>Enseignants</th></tr>';
+    echo'<tr><th>Lundi</th><th>Mardi</th>
     <th>Mercredi</th>
     <th>jeudi</th>
     <th>Vendredi</th></tr>';
@@ -238,7 +238,7 @@ function edtEtudiant(){
     echo'<tr><th>14h00</th></tr>';
     echo'<tr><th>18h00</th></tr>';
       while( $row = $req->fetch()){
-        echo'<tr><td>'.$row['matieres'].'</td><td>'.$row['nom'].'</td></tr>';
+        echo'<tr><td>'.$row['plage_horaire'].'</td><td>'.$row['matieres'].'</td><td>'.$row['nom'].'</td></tr>';
       }
       echo'</tbody></table>';
   }else{
