@@ -12,25 +12,38 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Espace étudiant
     </a>
-    <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
-      <a class="dropdown-item" href="espaceetudiant.php">
-        Mon Espace
+    <ul class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
+      <li>
+        <a class="dropdown-item" href="espaceetudiant.php">
+          Mon Espace
         </a>
-      <a class="dropdown-item" href="notes.php">
-        Notes
-      </a>
-      <a class="dropdown-item" href="emploidutemps.php">
-        Emploi du temps
-      </a>
-      <a class="dropdown-item" href="#">
-        Projets tuteurés
-      </a>
-      <a class="dropdown-item" href="#">
-        Offres d/alternance</a>
-      <a class="dropdown-item" href="#">
-        Support de cours
-      </a>
-    </div>
+      </li>
+      <li>
+        <a class="dropdown-item" href="notes.php">
+          Notes
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" href="emploidutemps.php">
+          Emploi du temps
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" href="#">
+          Projets tuteurés
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" href="#">
+          Offres d/alternance
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" href="#">
+          Support de cours
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="nav-item">
     <a class="nav-link <?= isset($deconnexion)? $deconnexion: ''; ?>"  href="deconnexion.php">
@@ -43,30 +56,42 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Espace entreprise
         </a>
-        <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Projet tuteuré
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="add_projet_tut.php">
-              Ajouter un projet tuteuré
+        <ul class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
+          <li>
+            <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Projet tuteuré
             </a>
-            <a class="dropdown-item" href="#">
-              Consulter ses projets tuteurés
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <a class="dropdown-item" href="add_projet_tut.php">
+                  Ajouter un projet tuteuré
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">
+                  Consulter ses projets tuteurés
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Offre d'alternance
             </a>
-          </div>
-          <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Offre d'alternance
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">
-              Ajouter une offre d'alternance
-            </a>
-            <a class="dropdown-item" href="#">
-              Consulter ses offres d'alternances
-            </a>
-          </div>
-        </div>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <a class="dropdown-item" href="#">
+                  Ajouter une offre d'alternance
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">
+                  Consulter ses offres d'alternances
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </li>
       <li class="nav-item">
         <a class="nav-link <?= isset($deconnexion)? $deconnexion: ''; ?>" href="deconnexion.php">
