@@ -10,5 +10,6 @@ ifIsConnected();
   <h1>Emploi du temps</h1>
     <hr>
     <br/>
+    <?php edtEtudiant(); ?>
 </div>
 <?php include("includes/footer.php"); ?>

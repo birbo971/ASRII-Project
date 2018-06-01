@@ -194,7 +194,7 @@ function ifIsConnected(){
     header("location:authentification.php");
   }
 }
-function notes(){
+function notesEtudiant(){
   $pdo= DB::get();
   $req = $pdo->prepare('SELECT notes,matieres,nom FROM notes,utilisateurs,matieres WHERE etat = "enseignant" AND utilisateurs.id_users = notes.id_enseignant  AND matieres.id_ens = utilisateurs.id_users AND notes.id_etudiant ='.$_SESSION["id"].' ');
   $req->execute();
@@ -215,4 +215,5 @@ function notes(){
     echo"Aucune notes dans la base.";
   }
 }
+
 ?>
