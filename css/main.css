@@ -50,13 +50,13 @@ footer {
 }
 
 h1 {
-  color: #00B2CC;
+  color: #00b0f0;
   text-align: center;
   margin-top: 20px;
 }
 
 h2 {
-  color: #F59000;
+  color: #e78200;
   margin-top: 50px;
 }
 
@@ -74,7 +74,7 @@ footer {
 }
 
 .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .active > .nav-link {
-  color: #00B2CC;
+  color: #00b0f0;
 }
 
 .fa-facebook-square {

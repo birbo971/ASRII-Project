@@ -6,7 +6,12 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
     <a class="nav-link" href="authentification.php">Connexion</a>
     </li>
 <?php
+<<<<<<< HEAD
 if($etat == 'etudiant' or $etat == 'personnel miaw'){
+=======
+}else{
+  if($etat == 'etudiant'  or $etat == 'personnel miaw'){
+>>>>>>> 8a77e5ea459d166f24d44575c5c70e1809810c7f
 ?>
   <li class="nav-item dropdown <?= isset($etudiant)? $etudiant: ''; ?>">
     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,13 +37,13 @@ if($etat == 'etudiant' or $etat == 'personnel miaw'){
       </a>
     </div>
   </li>
-  <li class="nav-item">
-    <a class="nav-link <?= isset($deconnexion)? $deconnexion: ''; ?>"  href="deconnexion.php">
-      Deconnexion
-    </a>
-  </li>
+
 <?php
+<<<<<<< HEAD
 }if ($etat == 'entreprise'  or $etat == 'personnel miaw') { ?>
+=======
+}if ($etat == 'entreprise' or $etat == 'personnel miaw' ) { ?>
+>>>>>>> 8a77e5ea459d166f24d44575c5c70e1809810c7f
       <li class="nav-item dropdown <?= isset($entreprise)? $entreprise: ''; ?>">
         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Espace entreprise
@@ -68,11 +73,7 @@ if($etat == 'etudiant' or $etat == 'personnel miaw'){
           </div>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link <?= isset($deconnexion)? $deconnexion: ''; ?>" href="deconnexion.php">
-          Deconnexion
-        </a>
-      </li>
+
 <?php
 }if($etat == 'enseignant' or $etat == 'personnel miaw'){ ?>
   <li class="nav-item dropdown <?= isset($enseignant)? $enseignant: ''; ?>">
@@ -117,12 +118,16 @@ if($etat == 'etudiant' or $etat == 'personnel miaw'){
       </li>
     </ul>
   </li>
-  <li>
-    <a class="nav-link <?= isset($deconnexion)? $deconnexion: ''; ?>"  href="deconnexion.php">
-      Deconnexion
-    </a>
-  </li>
-<?php
+
+    <?php
+    }
+    ?>
+    <li>
+      <a class="nav-link <?= isset($deconnexion)? $deconnexion: ''; ?>"  href="deconnexion.php">
+        Deconnexion
+      </a>
+    </li>
+  <?php
   }
 }
 }
@@ -197,21 +202,19 @@ function ifIsConnected(){
 }
 function notesEtudiant(){
   $pdo= DB::get();
-  $req = $pdo->prepare('SELECT notes,matieres,nom FROM notes,utilisateurs,matieres WHERE etat = "enseignant" AND utilisateurs.id_users = notes.id_enseignant  AND matieres.id_ens = utilisateurs.id_users AND notes.id_etudiant ='.$_SESSION["id"].' ');
+  $req = $pdo->prepare('SELECT notes,matieres,nom FROM notes,utilisateurs WHERE etat = "enseignant" AND utilisateurs.id_users = notes.id_enseignant AND notes.id_etudiant ='.$_SESSION["id"].' ');
   $req->execute();
   $nb = $req->rowCount();
   //tableaux des notes
   if($nb > 0){
   echo'<table class="table">';
-  echo'<thead class="thead-light">';
   echo'<tr><th>Matière</th>
       <th>Notes</th>
       <th>Enseignants</th>';
-  echo'</thead><tbody>';
   while($row = $req->fetch()){
       echo'<tr><td>'.$row['matieres'].'</td><td>'.$row['notes'].'</td><td>'.$row['nom'].'</td></tr>';
   }
-      echo'</tbody></table>';
+      echo'</table>';
   }else{
     echo"Aucune notes dans la base.";
   }
