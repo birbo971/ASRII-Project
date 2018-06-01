@@ -205,13 +205,15 @@ function notesEtudiant(){
   //tableaux des notes
   if($nb > 0){
   echo'<table class="table">';
+  echo'<thead class="thead-light">';
   echo'<tr><th>Matière</th>
       <th>Notes</th>
       <th>Enseignants</th>';
+  echo'</thead><tbody>';
   while($row = $req->fetch()){
       echo'<tr><td>'.$row['matieres'].'</td><td>'.$row['notes'].'</td><td>'.$row['nom'].'</td></tr>';
   }
-      echo'</table>';
+      echo'</tbody></table>';
   }else{
     echo"Aucune notes dans la base.";
   }

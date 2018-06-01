@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Ven 01 Juin 2018 à 07:42
+-- Généré le :  Ven 01 Juin 2018 à 09:26
 -- Version du serveur :  5.6.20-log
 -- Version de PHP :  5.4.31
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `ajout_projet` (
   `id` int(11) NOT NULL,
+  `id_entreprise` int(11) NOT NULL,
   `nom` varchar(255) DEFAULT NULL,
   `email` text,
   `titre` varchar(255) DEFAULT NULL,
@@ -38,30 +39,56 @@ CREATE TABLE IF NOT EXISTS `ajout_projet` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `ajout_stage`
+--
+
+CREATE TABLE IF NOT EXISTS `ajout_stage` (
+`id` int(11) NOT NULL,
+  `id_entreprise` int(11) NOT NULL,
+  `nom` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `titre` varchar(255) NOT NULL,
+  `description` longtext NOT NULL,
+  `experience` float NOT NULL,
+  `etat` enum('en attente','valide','refuse','') NOT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `ajout_stage`
+--
+
+INSERT INTO `ajout_stage` (`id`, `id_entreprise`, `nom`, `email`, `titre`, `description`, `experience`, `etat`) VALUES
+(1, 1, '1', '1@1.fr', '1', '1', 1, 'en attente');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `emploi_du_temps`
 --
 
 CREATE TABLE IF NOT EXISTS `emploi_du_temps` (
   `id_user` int(11) NOT NULL,
 `id_horaires` int(11) NOT NULL,
-  `horaires` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
+  `id_matieres` int(11) NOT NULL,
+  `plage_horaire` enum('matin','apres-midi','','') NOT NULL,
+  `date_horaire` date NOT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
--- Structure de la table `enseignant`
+-- Contenu de la table `emploi_du_temps`
 --
 
-CREATE TABLE IF NOT EXISTS `enseignant` (
-`id_ens` int(11) NOT NULL,
-  `nom` varchar(255) NOT NULL,
-  `prenom` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `date_naissance` date NOT NULL,
-  `matiere` varchar(255) NOT NULL,
-  `mdp` int(50) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+INSERT INTO `emploi_du_temps` (`id_user`, `id_horaires`, `id_matieres`, `plage_horaire`, `date_horaire`) VALUES
+(1, 1, 2, 'matin', '2018-06-18'),
+(1, 2, 2, 'apres-midi', '2018-06-18'),
+(1, 3, 5, 'matin', '2018-06-19'),
+(1, 4, 5, 'apres-midi', '2018-06-19'),
+(1, 5, 4, 'matin', '2018-06-20'),
+(1, 6, 4, 'apres-midi', '2018-06-20'),
+(1, 7, 3, 'matin', '2018-06-21'),
+(1, 8, 3, 'apres-midi', '2018-06-21'),
+(1, 9, 2, 'matin', '2018-06-22'),
+(1, 10, 3, 'apres-midi', '2018-06-22');
 
 -- --------------------------------------------------------
 
@@ -79,12 +106,33 @@ CREATE TABLE IF NOT EXISTS `entreprise` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `matieres`
+--
+
+CREATE TABLE IF NOT EXISTS `matieres` (
+`id_matiere` int(11) NOT NULL,
+  `id_ens` int(11) NOT NULL,
+  `matieres` varchar(255) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Contenu de la table `matieres`
+--
+
+INSERT INTO `matieres` (`id_matiere`, `id_ens`, `matieres`) VALUES
+(1, 2, 'SHELL'),
+(2, 3, 'PHP'),
+(3, 4, 'SQL'),
+(4, 5, 'JAVA');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `notes`
 --
 
 CREATE TABLE IF NOT EXISTS `notes` (
   `notes` varchar(255) NOT NULL,
-  `matieres` varchar(255) NOT NULL,
 `id_notes` int(11) NOT NULL,
   `id_enseignant` int(11) NOT NULL,
   `id_etudiant` int(11) NOT NULL
@@ -94,11 +142,11 @@ CREATE TABLE IF NOT EXISTS `notes` (
 -- Contenu de la table `notes`
 --
 
-INSERT INTO `notes` (`notes`, `matieres`, `id_notes`, `id_enseignant`, `id_etudiant`) VALUES
-('15/20', 'PHP', 1, 3, 1),
-('16/20', 'SQL', 2, 4, 1),
-('11/20', 'JAVA', 3, 5, 1),
-('11/20', 'SHELL', 4, 2, 1);
+INSERT INTO `notes` (`notes`, `id_notes`, `id_enseignant`, `id_etudiant`) VALUES
+('15/20', 1, 3, 1),
+('16/20', 2, 4, 1),
+('11/20', 3, 5, 1),
+('11/20', 4, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -152,22 +200,28 @@ ALTER TABLE `ajout_projet`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `ajout_stage`
+--
+ALTER TABLE `ajout_stage`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `emploi_du_temps`
 --
 ALTER TABLE `emploi_du_temps`
  ADD PRIMARY KEY (`id_horaires`);
 
 --
--- Index pour la table `enseignant`
---
-ALTER TABLE `enseignant`
- ADD PRIMARY KEY (`id_ens`);
-
---
 -- Index pour la table `entreprise`
 --
 ALTER TABLE `entreprise`
  ADD PRIMARY KEY (`id_entr`);
+
+--
+-- Index pour la table `matieres`
+--
+ALTER TABLE `matieres`
+ ADD PRIMARY KEY (`id_matiere`);
 
 --
 -- Index pour la table `notes`
@@ -192,20 +246,25 @@ ALTER TABLE `utilisateurs`
 --
 
 --
+-- AUTO_INCREMENT pour la table `ajout_stage`
+--
+ALTER TABLE `ajout_stage`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT pour la table `emploi_du_temps`
 --
 ALTER TABLE `emploi_du_temps`
-MODIFY `id_horaires` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `enseignant`
---
-ALTER TABLE `enseignant`
-MODIFY `id_ens` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_horaires` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT pour la table `entreprise`
 --
 ALTER TABLE `entreprise`
 MODIFY `id_entr` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `matieres`
+--
+ALTER TABLE `matieres`
+MODIFY `id_matiere` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `notes`
 --
