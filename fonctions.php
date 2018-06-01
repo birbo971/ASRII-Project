@@ -84,7 +84,7 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <li>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="add_notes.php">
               Ajouter une note
             </a>
           </li>
@@ -243,6 +243,49 @@ function edtEtudiant(){
       echo'</tbody></table>';
   }else{
     echo'Erreur aucun emploi du temps enregistré dans la base !';
+  }
+}
+function recupereMatiere(){
+  $pdo = DB::get();
+  $req = $pdo->prepare('SELECT matieres FROM matieres WHERE matieres.id_ens = '.$_SESSION['id'].'');
+  $req->execute();
+  $res = $req->rowCount();
+  if($res > 0){
+    while($row = $req->fetch()){
+        echo'<option>'.$row['matieres'].'</option>';
+    }
+  }else{
+      echo'<option>Aucune matière référé.</option>';
+    }
+}
+function recupereEtudiant(){
+  $pdo = DB::get();
+  $req = $pdo->prepare('SELECT nom,prenom FROM utilisateurs WHERE etat ="etudiant"');
+  $req->execute();
+  $res = $req->rowCount();
+  if($res > 0){
+    while($row = $req->fetch()){
+        echo'<option>'.$row['nom'].' '.$row['prenom'].'</option>';
+    }
+  }else{
+      echo'<option>Aucune matière référé.</option>';
+    }
+}
+function insertionNotes(){
+  $pdo = DB::get();
+  if(isset($_POST['enregistre'])){
+      $notes = $_POST['notes'];
+      $etudiant = $_POST['etudiant'];
+  $req = $pdo->prepare('INSERT INTO notes(notes,id_enseignant,id_etudiant) VALUES (:notes,:id_enseignant,:id_enseignant,:id_etudiant) ');
+  $req->execute(array(':notes'=>$notes,
+                      ':id_enseignant'=>$_SESSION['id'],
+                      ':id_etudiant'=>$etudiant,));
+  $res = $req->rowCount();
+    if(res > 0){
+          echo'Insertion bien effectué !';
+        }else{
+          echo"Erreur d'insertion !";
+        }
   }
 }
 ?>

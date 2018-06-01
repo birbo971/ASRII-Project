@@ -11,7 +11,13 @@ ifIsConnected();
 
     <hr>
     <br/>
-    <?php edtEtudiant(); ?>
-  <hr>
+    <?php if($_SESSION['etat'] == 'etudiant'){
+      edtEtudiant(); }else{
+        echo'<div class="alert alert-info" role="alert">
+  Aucun emploi du temps disponible.
+</div>';
+      }
+      ?>
+
 </div>
 <?php include("includes/footer.php"); ?>
