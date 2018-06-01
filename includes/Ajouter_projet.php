@@ -26,6 +26,16 @@ class Ajouter_projet
 
     }
 
+    public static function  getProjetEntreprise($id)
+    {
+
+        $sth = DB::get()->prepare("select * from ajout_projet where id_entreprise = :id");
+        $sth->bindParam(':id', $id);
+	     	$sth->execute();
+        return $sth;
+
+    }
+
     public static function  ajouter_stage($nom, $email, $titre, $desc,$experience,$id)
     {
 
