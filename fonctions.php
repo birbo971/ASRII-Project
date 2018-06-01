@@ -79,37 +79,49 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Espace enseignant
     </a>
-    <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
-      <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Notes
-      </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-        <a class="dropdown-item" href="#">
-          Ajouter une note
+    <ul class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
+      <li>
+        <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Notes
         </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li>
+            <a class="dropdown-item" href="#">
+              Ajouter une note
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">
+              Consulter ses notes déposées
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
         <a class="dropdown-item" href="#">
-          Consulter ses notes déposées
+          Emploi du temps personnel
         </a>
-      </div>
-      <a class="dropdown-item" href="#">
-        Emploi du temps personnel
-      </a>
-      <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Support de cours
-      </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-        <a class="dropdown-item" href="#">
-          Ajouter un support de cours
+      </li>
+      <li>
+        <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Support de cours
         </a>
-        <a class="dropdown-item" href="#">
-          Consulter ses supports de cours
-        </a>
-      </div>
-    </div>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">
+            Ajouter un support de cours
+          </a>
+          <a class="dropdown-item" href="#">
+            Consulter ses supports de cours
+          </a>
+        </ul>
+      </li>
+    </ul>
   </li>
-  <a class="nav-link <?= isset($deconnexion)? $deconnexion: ''; ?>"  href="deconnexion.php">
-    Deconnexion
-  </a>
+  <li>
+    <a class="nav-link <?= isset($deconnexion)? $deconnexion: ''; ?>"  href="deconnexion.php">
+      Deconnexion
+    </a>
+  </li>
 <?php
   }
 }
