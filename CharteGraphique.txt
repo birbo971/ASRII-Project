@@ -1,7 +1,12 @@
+﻿Ancien :
 Bleu : #00B2CC
 vert : #AFCA01
 orange : #F59000
 violet : #B2579D
+
+Nouveau :
+Bleu : 00b0f0
+Orange : e78200
 
 Navbar :
 Fond clair
