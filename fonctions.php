@@ -6,7 +6,7 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
     <a class="nav-link" href="authentification.php">Connexion</a>
     </li>
 <?php
-}elseif($etat == 'etudiant'){
+if($etat == 'etudiant' or $etat == 'personnel miaw'){
 ?>
   <li class="nav-item dropdown <?= isset($etudiant)? $etudiant: ''; ?>">
     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,7 +38,7 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
     </a>
   </li>
 <?php
-}elseif ($etat == 'entreprise') { ?>
+}if ($etat == 'entreprise'  or $etat == 'personnel miaw') { ?>
       <li class="nav-item dropdown <?= isset($entreprise)? $entreprise: ''; ?>">
         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Espace entreprise
@@ -74,7 +74,7 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
         </a>
       </li>
 <?php
-}elseif($etat == 'enseignant'){ ?>
+}if($etat == 'enseignant' or $etat == 'personnel miaw'){ ?>
   <li class="nav-item dropdown <?= isset($enseignant)? $enseignant: ''; ?>">
     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Espace enseignant
@@ -124,6 +124,7 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
   </li>
 <?php
   }
+}
 }
 
 include('includes/DB.php');
@@ -215,5 +216,33 @@ function notesEtudiant(){
     echo"Aucune notes dans la base.";
   }
 }
+function edtEtudiant(){
+  $pdo = DB::get();
+  $req =$pdo->prepare("SELECT DISTINCT plage_horaire,matieres,nom,id_ens FROM emploi_du_temps,matieres,utilisateurs WHERE utilisateurs.id_users = matieres.id_ens AND emploi_du_temps.id_matieres = utilisateurs.id_users;");
+  $req->execute();
+  $res = $req->rowCount();
 
+  if($res > 0){
+    echo'<table class="table table-bordered">';
+    echo'<thead class="thead-dark">';
+    echo'<tr><th>Horaires</th>';
+    echo'<th>Matieres</th>';
+    echo'<th>Enseignants</th></tr>';
+    echo'<tr><th>Lundi</th><th>Mardi</th>
+    <th>Mercredi</th>
+    <th>jeudi</th>
+    <th>Vendredi</th></tr>';
+    echo'</thead><tbody>';
+    echo'<tr><th>9h00</th></tr>';
+    echo'<tr><th>13h00</th></tr>';
+    echo'<tr><th>14h00</th></tr>';
+    echo'<tr><th>18h00</th></tr>';
+      while( $row = $req->fetch()){
+        echo'<tr><td>'.$row['plage_horaire'].'</td><td>'.$row['matieres'].'</td><td>'.$row['nom'].'</td></tr>';
+      }
+      echo'</tbody></table>';
+  }else{
+    echo'Erreur aucun emploi du temps enregistré dans la base !';
+  }
+}
 ?>
