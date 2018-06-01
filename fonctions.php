@@ -219,26 +219,62 @@ function notesEtudiant(){
   }
 }
 function edtEtudiant(){
+  date_default_timezone_set('Europe/Paris');
+  $date = date("Y-m-d");
+  $day = date("N") - 1;
+  // echo date('Y-m-d',strtotime($date. '-1 day'));
+  $debutSemaine = date('Y-m-d',strtotime($date. '-' . $day . ' day'));
+  $semaine = array();
+  array_push($semaine, $debutSemaine);
+  array_push($semaine, date('Y-m-d', strtotime($debutSemaine. '+1 day')));
+  array_push($semaine, date('Y-m-d', strtotime($debutSemaine. '+2 day')));
+  array_push($semaine, date('Y-m-d', strtotime($debutSemaine. '+3 day')));
+  array_push($semaine, date('Y-m-d', strtotime($debutSemaine. '+4 day')));
   $pdo = DB::get();
-  $req =$pdo->prepare("SELECT DISTINCT plage_horaire,matieres,nom,id_ens FROM emploi_du_temps,matieres,utilisateurs WHERE utilisateurs.id_users = matieres.id_ens AND emploi_du_temps.id_matieres = utilisateurs.id_users;");
+  // $req =$pdo->prepare("SELECT DISTINCT plage_horaire,matieres,nom,id_ens FROM emploi_du_temps,matieres,utilisateurs WHERE utilisateurs.id_users = matieres.id_ens AND emploi_du_temps.id_matieres = utilisateurs.id_users;");
+  $req =$pdo->prepare("SELECT DISTINCT plage_horaire,date_horaire,matieres,nom,id_ens FROM emploi_du_temps,matieres,utilisateurs
+  WHERE utilisateurs.id_users = matieres.id_ens
+  AND emploi_du_temps.id_matieres = utilisateurs.id_users
+  AND date_horaire IN ('". $semaine[0]  . "', '" . $semaine[1] . "', '" . $semaine[2] . "', '" . $semaine[3] . "', '" . $semaine[4] . "')
+  ORDER BY plage_horaire, date_horaire;");
   $req->execute();
   $res = $req->rowCount();
 
   if($res > 0){
-    echo'<table class="table table-bordered">';
-    echo'<thead class="thead-dark">';
-    echo'<tr><th>Horaires</th>';
-    echo'<th>Lundi</th><th>Mardi</th>
-    <th>Mercredi</th>
-    <th>jeudi</th>
-    <th>Vendredi</th></tr>';
-    echo'</thead><tbody>';
-    echo'<tr><th>9h00</th></tr>';
-    echo'<tr><th>13h00</th></tr>';
-    echo'<tr><th>14h00</th></tr>';
-    echo'<tr><th>18h00</th></tr>';
+    ?>
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>Horaires</th>
+          <th>Lundi</th>
+          <th>Mardi</th>
+          <th>Mercredi</th>
+          <th>jeudi</th>
+          <th>Vendredi</th>
+        </tr>
+      </thead>
+      <tbody>
+    <?php
+    // echo'<table class="table table-bordered">';
+    // echo'<thead class="thead-dark">';
+    // echo'<tr><th>Horaires</th>';
+    // echo'<th>Lundi</th><th>Mardi</th>
+    // <th>Mercredi</th>
+    // <th>jeudi</th>
+    // <th>Vendredi</th></tr>';
+    // echo'</thead><tbody>';
+    // echo'<tr><th>9h00</th></tr>';
+    // echo'<tr><th>13h00</th></tr>';
+    // echo'<tr><th>14h00</th></tr>';
+    // echo'<tr><th>18h00</th></tr>';
       while( $row = $req->fetch()){
-        echo'<tr><td>'.$row['matieres'].'</td><td>'.$row['nom'].'</td></tr>';
+        if ($row['date_horaire'] == $debutSemaine) {
+          echo "<tr><td></td>";
+        }
+        echo'<td>'.$row['matieres'] ." " . $row['nom'].'</td>';
+        if ($row['date_horaire'] == $semaine[4]) {
+          echo "</tr>";
+        }
       }
       echo'</tbody></table>';
   }else{
