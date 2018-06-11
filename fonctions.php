@@ -79,6 +79,9 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
     </a>
     <ul class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
       <li>
+        <a class="dropdown-item" href="espaceenseignant.php">
+          Mon Espace
+          </a>
         <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Notes
         </a>
@@ -320,7 +323,11 @@ function insertionNotes(){
       $res = $req->rowCount();
       if($res > 0){
         echo'<br/><div class="col-sm-8 text-center contentcenter"><div class="alert alert-success" role="alert">
-        Valeurs bien ajoutées dans la base de données.</div></div>';
+        Valeurs bien ajoutées dans la base de données.</div></div>';?>
+        <script type='text/javascript'>
+        window.setTimeout('location=("espaceenseignant.php");',2000);
+        </script>
+        <?php
       }else{
         echo'Aucune valeur ajoutées.';
       }
@@ -332,7 +339,7 @@ function insertionNotes(){
 }
 function notesEnseignant(){
   $pdo= DB::get();
-  $req = $pdo->prepare('SELECT notes,matieres,nom FROM notes,utilisateurs,matieres WHERE etat = "enseignant"  AND utilisateurs.id_users = notes.id_etudiant AND notes.id_enseignant='.$_SESSION["id"].' AND  utilisateurs.id_users = matieres.id_ens ');
+  $req = $pdo->prepare('SELECT id_notes,nom,prenom, notes, matieres FROM notes JOIN utilisateurs on notes.id_etudiant = utilisateurs.id_users JOIN matieres on matieres.id_ens=notes.id_enseignant WHERE id_enseignant ='.$_SESSION['id'].' and id_ens ='.$_SESSION['id'].'');
   $req->execute();
   $nb = $req->rowCount();
   //tableaux des notes
@@ -340,14 +347,30 @@ function notesEnseignant(){
   echo'<table class="table">';
   echo'<tr><th>Matière</th>
       <th>Notes</th>
-      <th>Enseignants</th>';
+      <th>Etudiants</th>';
   while($row = $req->fetch()){
-      echo'<tr><td>'.$row['matieres'].'</td><td>'.$row['notes'].'</td><td>'.$row['nom'].'</td></tr>';
+      echo'<tr><td>'.$row['matieres'].'</td><td  class="test" ><input type="text" id="'.$row['id_notes'].'"class="test form-control" style="width:50%;" value="'.$row['notes'].'" ></td><td>'.$row['nom'].' '.$row['prenom'].'</td></tr>';
   }
       echo'</table>';
   }else{
     echo"<div class='alert alert-info'>Aucune notes dans la base.</div>";
   }
 }
+function updateNotes($notes,$id){
+  $pdo = DB::get();
+  $req = $pdo->prepare('UPDATE notes SET notes =:notes WHERE id_notes ='.$id.'');
+  $req->execute(array('notes'=>$notes));
+  $res = $req->rowCount();
+  if($res > 0){
+    echo'<div class="alert alert-success">Notes enregistrée.<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button></div>';
+  }else{
+      echo'<div class="alert alert-success">Notes Non enregistrée.<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button></div>';
+  }
+}
+
 
 ?>

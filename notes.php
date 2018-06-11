@@ -22,6 +22,32 @@ ifIsConnected();
     <br/>
     <?php notesEnseignant(); ?>
   </div>
+  <div id="more_com" class="">
+
+  </div>
 <?php }
+
 include('includes/footer.php');
 ?>
+
+<script type="text/javascript">
+
+$(".test").change(function(){
+  var notes = this.value;
+
+  $.ajax({
+     url : 'ajax.php',
+     type : 'GET',
+     data : 'id_codes=' + notes+'&id='+this.id,
+     success : function(code_html, statut){ // code_html contient le HTML renvoyé
+
+       $('#more_com').html(code_html);
+       console.log(code_html);
+     }
+  });
+});
+
+
+
+
+</script>
