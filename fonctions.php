@@ -254,6 +254,7 @@ function edtEtudiant(){
         <a href='" . $_SERVER['PHP_SELF'] . "?date=" . date('Y-m-d', strtotime($debutSemaine. '+7 day')) . "' class='btn btn-left'><i class='fas fa-arrow-right'></i></a></h2>  ";
   if($res > 0) {
     ?>
+    <div class="table-responsive">
     <table class="table table-bordered">
       <thead class="thead-dark">
         <tr>
@@ -294,7 +295,7 @@ function edtEtudiant(){
           echo "</tr>";
         }
       }
-      echo'</tbody></table>';
+      echo'</tbody></table></div>';
   }else{
     echo'<div class="alert alert-info" role="alert">Aucun emploi du temps n\'est enregistré dans la base pour cette semaine !</div>';
   }
