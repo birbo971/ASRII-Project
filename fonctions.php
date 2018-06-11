@@ -219,6 +219,7 @@ function notesEtudiant(){
 function edtEtudiant(){
   date_default_timezone_set('Europe/Paris');
   $date = date("Y-m-d");
+  // $day = date("N") - 1;
   $day = date("N") - 1;
   // echo date('Y-m-d',strtotime($date. '-1 day'));
   $debutSemaine = date('Y-m-d',strtotime($date. '-' . $day . ' day'));
@@ -265,7 +266,7 @@ function edtEtudiant(){
     // echo'<tr><th>13h00</th></tr>';
     // echo'<tr><th>14h00</th></tr>';
     // echo'<tr><th>18h00</th></tr>';
-  
+
       while( $row = $req->fetch()){
         if ($row['date_horaire'] == $debutSemaine) {
           echo "<tr><td></td>";
