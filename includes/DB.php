@@ -8,7 +8,7 @@ class DB
        {
            try
            {
-               self::$instance = new PDO('mysql:host=localhost;dbname=asrii', 'root', 'root');
+               self::$instance = new PDO('mysql:host=localhost;dbname=asrii', 'root', '');
            }
            catch(PDOException $e)
            {

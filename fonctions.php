@@ -108,7 +108,7 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
           Support de cours
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href=addsupportcours.php>
             Ajouter un support de cours
           </a>
           <a class="dropdown-item" href="#">
@@ -371,6 +371,25 @@ function updateNotes($notes,$id){
   </button></div>';
   }
 }
-
+function addSupportCours(){
+$pdo = DB::get();
+if(isset($_POST['btn-upload']))
+  {    
+     
+ $file = rand(1000,100000)."-".$_FILES['file']['name'];
+    $file_loc = $_FILES['file']['tmp_name'];
+ $file_size = $_FILES['file']['size'];
+ $file_type = $_FILES['file']['type'];
+ $folder="uploads/";
+ 
+ move_uploaded_file($file_loc,$folder.$file);
+ $sql = $pdo->prepare("INSERT INTO tbl_uploads(file,type,size) VALUES('$file','$file_type','$file_size')");
+ $sql->execute();
+ $row = $sql->rowCount();
+ if($row > 0){
+   echo"<div class='alert alert-success'>Vous avez bien importer votre fichier</div>";
+ }
+  }
+}
 
 ?>
