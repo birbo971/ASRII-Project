@@ -12,7 +12,7 @@ include('includes/header.php'); ?>
       <div class="col-md-8">
         <p>Matières</p>
         <select class="form-control"  name="matiere">
-            <option> </option>
+            <option value="vide"></option>
             <?php recupereMatiere(); ?>
         </select>
       </div>
