@@ -29,3 +29,6 @@ Texte en orange
 Footer :
 Fond foncé
 Texte en blanc
+
+
+select nom,prenom, notes, matieres from notes join utilisateurs on notes.id_etudiant = utilisateurs.id_users join matieres on matieres.id_ens=notes.id_enseignant where id_enseignant = 2 and id_ens = 2 

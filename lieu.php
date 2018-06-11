@@ -1,6 +1,7 @@
 <?php
 $titre ="Lieu de la formation";
 $presentation="active";
+
  include('includes/header.php'); ?>
 
 <?php include('includes/navbar.php'); ?>
