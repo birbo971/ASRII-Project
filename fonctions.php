@@ -84,7 +84,7 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <li>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="add_notes.php">
               Ajouter une note
             </a>
           </li>
@@ -279,4 +279,5 @@ function edtEtudiant(){
     echo'Erreur aucun emploi du temps enregistré dans la base !';
   }
 }
+
 ?>

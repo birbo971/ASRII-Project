@@ -1,5 +1,5 @@
 <?php
-$titre ="Connexion";
+$titre ="Ajouter une note";
 $authentification = "active";
 include('includes/header.php'); ?>
 <?php include('includes/navbar.php');?>
@@ -12,7 +12,7 @@ include('includes/header.php'); ?>
       <div class="col-md-8">
         <p>Matières</p>
         <select class="form-control"  name="matiere">
-            <option> </option>
+            <option value="vide"></option>
             <?php recupereMatiere(); ?>
         </select>
       </div>
@@ -25,6 +25,7 @@ include('includes/header.php'); ?>
       <div class="col-md-4 col-sm-12">
         <p>Etudiant</p>
         <select class="form-control"  name="etudiant">
+          <option value="vide"></option>
           <?php recupereEtudiant(); ?>
         </select>
       </div>

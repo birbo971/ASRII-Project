@@ -15,7 +15,7 @@ ifIsConnected();
   <hr class="hrmoyen"/>
   <ul>
     <li>
-      <a href="">Ajouter une note.</a>
+      <a href="add_notes.php">Ajouter une note.</a>
     </li>
     <li>
       <a href="">Consulter ses notes déposées.</a>
