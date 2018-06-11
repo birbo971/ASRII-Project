@@ -221,19 +221,10 @@ function notesEtudiant(){
 }
 function edtEtudiant(){
   date_default_timezone_set('Europe/Paris');
-  if (isset ($_GET["date"])) {
-    $date = $_GET["date"];
-    $time = strtotime($_GET["date"]);
-    $day = date("N", $time) - 1;
-  }
-  else {
-    $date = date("Y-m-d");
-    $day = date("N") - 1;
-  }
-  // $day = date("N") - 1;
+  $date = date("Y-m-d");
+  $day = date("N") - 1;
   // echo date('Y-m-d',strtotime($date. '-1 day'));
   $debutSemaine = date('Y-m-d',strtotime($date. '-' . $day . ' day'));
-  $finSemaine = date('Y-m-d',strtotime($debutSemaine. '+6 day'));
   $semaine = array();
   array_push($semaine, $debutSemaine);
   array_push($semaine, date('Y-m-d', strtotime($debutSemaine. '+1 day')));
@@ -249,15 +240,9 @@ function edtEtudiant(){
   ORDER BY plage_horaire, date_horaire;");
   $req->execute();
   $res = $req->rowCount();
-  // echo "<i class=\"fas fa-chevron-circle-left\"><input type='button'/></i>          <br>";
-  // echo "<input type='submit' value='<i class=\"fas fa-chevron-circle-left\"></i>'/>          <br>";
-  // echo "<input type='button' value='<i class=\'fas fa-chevron-circle-left\'></i>'/> Semaine du " . $debutSemaine . " au " . $finSemaine . " <input type='button'><i class='fas fa-chevron-circle-right'></i></input>";
-  echo "<h2 class='text-center'><a href='" . $_SERVER['PHP_SELF'] . "?date=" . date('Y-m-d', strtotime($debutSemaine. '-7 day')) . "' class='btn btn-left'><i class='fas fa-arrow-left'></i></a>
-        Semaine du " . $debutSemaine . " au " . $finSemaine . "
-        <a href='" . $_SERVER['PHP_SELF'] . "?date=" . date('Y-m-d', strtotime($debutSemaine. '+7 day')) . "' class='btn btn-left'><i class='fas fa-arrow-right'></i></a></h2>  ";
-  if($res > 0) {
+
+  if($res > 0){
     ?>
-    <div class="table-responsive">
     <table class="table table-bordered">
       <thead class="thead-dark">
         <tr>
@@ -286,21 +271,16 @@ function edtEtudiant(){
 
       while( $row = $req->fetch()){
         if ($row['date_horaire'] == $debutSemaine) {
-          if ($row['plage_horaire'] == "matin") {
-            echo "<tr><td><small>09h00</small><br><small>13h00</small></td>";
-          }
-          else {
-            echo "<tr><td><small>14h00</small><br><small>18h00</small></td>";
-          }
+          echo "<tr><td></td>";
         }
-        echo'<td> Matière : ' .$row['matieres'] . '<br>Professeur : ' . $row['nom'].'</td>';
+        echo'<td>'.$row['matieres'] ." " . $row['nom'].'</td>';
         if ($row['date_horaire'] == $semaine[4]) {
           echo "</tr>";
         }
       }
-      echo'</tbody></table></div>';
+      echo'</tbody></table>';
   }else{
-    echo'<div class="alert alert-info" role="alert">Aucun emploi du temps n\'est enregistré dans la base pour cette semaine !</div>';
+    echo'<div class="alert alert-info" role="alert">Erreur aucun emploi du temps enregistré dans la base !</div>';
   }
 }
 
