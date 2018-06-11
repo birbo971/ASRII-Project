@@ -89,7 +89,7 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
             </a>
           </li>
           <li>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="notes.php">
               Consulter ses notes déposées
             </a>
           </li>
@@ -278,9 +278,10 @@ function edtEtudiant(){
       }
       echo'</tbody></table>';
   }else{
-    echo'Erreur aucun emploi du temps enregistré dans la base !';
+    echo'<div class="alert alert-info" role="alert">Erreur aucun emploi du temps enregistré dans la base !</div>';
   }
 }
+
 function recupereMatiere(){
   $pdo = DB::get();
   $req = $pdo->prepare("SELECT * FROM matieres WHERE matieres.id_ens = ".$_SESSION['id']."");
@@ -330,4 +331,24 @@ function insertionNotes(){
     }
   }
 }
+function notesEnseignant(){
+  $pdo= DB::get();
+  $req = $pdo->prepare('SELECT notes,matieres,nom FROM notes,utilisateurs,matieres WHERE etat = "enseignant"  AND utilisateurs.id_users = notes.id_etudiant AND notes.id_enseignant='.$_SESSION["id"].' AND  utilisateurs.id_users = matieres.id_ens ');
+  $req->execute();
+  $nb = $req->rowCount();
+  //tableaux des notes
+  if($nb > 0){
+  echo'<table class="table">';
+  echo'<tr><th>Matière</th>
+      <th>Notes</th>
+      <th>Enseignants</th>';
+  while($row = $req->fetch()){
+      echo'<tr><td>'.$row['matieres'].'</td><td>'.$row['notes'].'</td><td>'.$row['nom'].'</td></tr>';
+  }
+      echo'</table>';
+  }else{
+    echo"<div class='alert alert-info'>Aucune notes dans la base.</div>";
+  }
+}
+
 ?>
