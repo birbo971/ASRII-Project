@@ -15,6 +15,13 @@ ifIsConnected();
     <?php notesEtudiant(); ?>
   </div>
 <?php
+}else if($_SESSION['etat'] == "enseignant"){
+?>
+  <div class="container">
+    <h1>Notes déposées</h1>
+    <br/>
+    <?php notesEnseignant(); ?>
+  </div>
+<?php }
 include('includes/footer.php');
-}
 ?>

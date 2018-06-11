@@ -18,10 +18,10 @@ ifIsConnected();
       <a href="add_notes.php">Ajouter une note.</a>
     </li>
     <li>
-      <a href="">Consulter ses notes déposées.</a>
+      <a href="notes.php">Consulter ses notes déposées.</a>
     </li>
   </ul>
-  <h2>Emploi du temp personnel <i class="fas fa-newspaper"></i></h2>
+  <h2>Emploi du temps personnel <i class="fas fa-newspaper"></i></h2>
   <hr class="hrmoyen"/>
   <ul>
     <li>

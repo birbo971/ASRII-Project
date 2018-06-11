@@ -89,7 +89,7 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
             </a>
           </li>
           <li>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="notes.php">
               Consulter ses notes déposées
             </a>
           </li>
@@ -265,6 +265,7 @@ function edtEtudiant(){
     // echo'<tr><th>13h00</th></tr>';
     // echo'<tr><th>14h00</th></tr>';
     // echo'<tr><th>18h00</th></tr>';
+
       while( $row = $req->fetch()){
         if ($row['date_horaire'] == $debutSemaine) {
           echo "<tr><td></td>";
@@ -276,7 +277,76 @@ function edtEtudiant(){
       }
       echo'</tbody></table>';
   }else{
-    echo'Erreur aucun emploi du temps enregistré dans la base !';
+    echo'<div class="alert alert-info" role="alert">Erreur aucun emploi du temps enregistré dans la base !</div>';
+  }
+}
+
+function recupereMatiere(){
+  $pdo = DB::get();
+  $req = $pdo->prepare("SELECT * FROM matieres WHERE matieres.id_ens = ".$_SESSION['id']."");
+  $req->execute();
+  $nb = $req->rowCount();
+  if($nb > 0){
+    while ($row =$req->fetch()) {
+      echo'<option>'.$row['matieres'].'</option>';
+    }
+  }else{
+    echo'<option>Aucune valeur</option>';
+  }
+}
+function recupereEtudiant(){
+    $pdo = DB::get();
+    $req = $pdo->prepare("SELECT id_users,nom,prenom FROM utilisateurs WHERE etat = 'etudiant' ");
+    $req->execute();
+    $nb = $req->rowCount();
+  if($nb > 0){
+    while ($row = $req->fetch()) {
+      echo'<option value='.$row['id_users'].'>'.$row['nom'].' '.$row['prenom'].'</option>';
+    }
+  }else{
+    echo'<option>Aucune valeur</option>';
+  }
+}
+function insertionNotes(){
+  if(isset($_POST['enregistre'])){
+    if(!empty($_POST['notes'])){
+      $notes = $_POST['notes'];
+      $etudiant = $_POST['etudiant'];
+      $pdo = DB::get();
+      $req = $pdo->prepare("INSERT INTO notes(notes,id_enseignant,id_etudiant) VALUES(:notes,:id_enseignant,:id_etudiant)");
+      $req->execute(array(":notes"=>$notes,
+                          ":id_enseignant"=>$_SESSION['id'],
+                          ":id_etudiant"=>$etudiant));
+      $res = $req->rowCount();
+      if($res > 0){
+        echo'<br/><div class="col-sm-8 text-center contentcenter"><div class="alert alert-success" role="alert">
+        Valeurs bien ajoutées dans la base de données.</div></div>';
+      }else{
+        echo'Aucune valeur ajoutées.';
+      }
+    }else{
+      echo'<br/><div class="col-sm-8 text-center contentcenter"><div class="alert alert-danger" role="alert">
+      Erreur ! tous les champs ne sont pas remplies.</div></div>';
+    }
+  }
+}
+function notesEnseignant(){
+  $pdo= DB::get();
+  $req = $pdo->prepare('SELECT notes,matieres,nom FROM notes,utilisateurs,matieres WHERE etat = "enseignant"  AND utilisateurs.id_users = notes.id_etudiant AND notes.id_enseignant='.$_SESSION["id"].' AND  utilisateurs.id_users = matieres.id_ens ');
+  $req->execute();
+  $nb = $req->rowCount();
+  //tableaux des notes
+  if($nb > 0){
+  echo'<table class="table">';
+  echo'<tr><th>Matière</th>
+      <th>Notes</th>
+      <th>Enseignants</th>';
+  while($row = $req->fetch()){
+      echo'<tr><td>'.$row['matieres'].'</td><td>'.$row['notes'].'</td><td>'.$row['nom'].'</td></tr>';
+  }
+      echo'</table>';
+  }else{
+    echo"<div class='alert alert-info'>Aucune notes dans la base.</div>";
   }
 }
 

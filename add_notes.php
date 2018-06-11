@@ -19,13 +19,13 @@ include('includes/header.php'); ?>
       <br/>
       <div class="col-md-6 col-sm-12">
         <p>Notes</p>
-        <input type="number" name="notes" class="form-control" placeholder="/20">
+        <input type="text" name="notes" class="form-control" placeholder="">
       </div>
       <br/>
       <div class="col-md-4 col-sm-12">
         <p>Etudiant</p>
-        <select class="form-control"  name="etudiant">
-          <option value="vide"></option>
+        <select class="form-control" name="etudiant">
+        <option> </option>
           <?php recupereEtudiant(); ?>
         </select>
       </div>
