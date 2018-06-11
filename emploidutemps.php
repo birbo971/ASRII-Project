@@ -1,6 +1,7 @@
 <?php
 $etudiant ='active';
 $titre ="Emploi du temps";
+
 include('includes/header.php'); ?>
 <?php include('includes/navbar.php'); ?>
 <?php
