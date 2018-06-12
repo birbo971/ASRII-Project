@@ -16,6 +16,14 @@ class Ajouter_projet
 		$sth->execute();
     }
 
+    public static function  getProjetValide()
+    {
+
+      $sth = DB::get()->prepare("select * from ajout_projet where etat ='valide'");
+      $sth->execute();
+       return $sth;
+    }
+
     public static function  get_Projet($email)
     {
 

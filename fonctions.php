@@ -25,7 +25,7 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
       <a class="dropdown-item" href="emploidutemps.php">
         Emploi du temps
       </a>
-      <a class="dropdown-item" href="#">
+      <a class="dropdown-item" href="consulterProjet.php">
         Projets tuteurés
       </a>
       <a class="dropdown-item" href="consulteroffresalternances.php">
@@ -46,6 +46,9 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
           Espace entreprise
         </a>
         <div class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="espaceentreprise.php">
+            Mon Espace
+            </a>
           <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Projet tuteuré
           </a>
@@ -126,9 +129,12 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
 if( $etat == 'personnel miaw'){ ?>
   <li class="nav-item dropdown <?= isset($enseignant)? $enseignant: ''; ?>">
     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      admin
+      Espace Administrateur
     </a>
     <ul class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
+      <a class="dropdown-item" href="espacepersonnel.php">
+        Mon Espace
+        </a>
       <li>
         <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Validations
@@ -184,7 +190,7 @@ function connexionEspaceEtud(){
         $_SESSION['etat'] = $nb['etat'];
         if($_SESSION['etat'] == 'etudiant'){
         echo'<br/><div class="col-sm-8 text-center contentcenter"><div class="alert alert-success" role="alert">
-         Vous avez bien été connecter ! Vous allez être rediriger dans 3 secondes.
+         Vous avez bien été connecter en tant qu\'etudiant ! Vous allez être rediriger dans 3 secondes.
      </div></div>';
         ?><script type='text/javascript'>
         window.setTimeout('location=("espaceetudiant.php");',3000);
@@ -192,12 +198,27 @@ function connexionEspaceEtud(){
         <?php
         }elseif($_SESSION['etat'] == "enseignant"){
        echo'<br/><div class="col-sm-8 text-center contentcenter"><div class="alert alert-success" role="alert">
-        Vous avez bien été connecter ! Vous allez être rediriger dans 3 secondes.
+        Vous avez bien été connecter en tant qu\'enseignant ! Vous allez être rediriger dans 3 secondes.
     </div></div>'; ?>
         <script type='text/javascript'>
     window.setTimeout('location=("espaceenseignant.php");',3000);
     </script><?php
-     }
+  }elseif ($_SESSION['etat'] == "entreprise") {
+    echo'<br/><div class="col-sm-8 text-center contentcenter"><div class="alert alert-success" role="alert">
+     Vous avez bien été connecter en tant qu\'entreprise! Vous allez être rediriger dans 3 secondes.
+ </div></div>'; ?>
+     <script type='text/javascript'>
+ window.setTimeout('location=("espaceentreprise.php");',3000);
+ </script><?php
+  }elseif ($_SESSION['etat'] == "personnel miaw"){
+    echo'<br/><div class="col-sm-8 text-center contentcenter"><div class="alert alert-success" role="alert">
+     Vous avez bien été connecter en tant que personnel de la formation ! Vous allez être rediriger dans 3 secondes.
+ </div></div>'; ?>
+     <script type='text/javascript'>
+ window.setTimeout('location=("espacepersonnel.php");',3000);
+ </script>
+<?php
+  }
         ?>
         <?php
       }else{
