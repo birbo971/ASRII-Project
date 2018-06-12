@@ -12,13 +12,19 @@ ifIsConnected();
 
     <hr>
     <br/>
-    <?php if($_SESSION['etat'] == 'etudiant'){
-      edtEtudiant(); }else{
+    <?php
+    if($_SESSION['etat'] == 'etudiant') {
+      edtEtudiant();
+    }
+    elseif ($_SESSION['etat'] == 'enseignant') {
+      edtEnseignant();
+    }
+    else {
         echo'<div class="alert alert-info" role="alert">
-  Aucun emploi du temps disponible.
-</div>';
-      }
-      ?>
+            Aucun emploi du temps disponible.
+            </div>';
+    }
+    ?>
 
 </div>
 <?php include("includes/footer.php"); ?>

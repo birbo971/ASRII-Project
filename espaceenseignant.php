@@ -21,7 +21,7 @@ ifIsConnected();
       <a href="notes.php">Consulter ses notes déposées.</a>
     </li>
   </ul>
-  <h2>Emploi du temps personnel <i class="fas fa-newspaper"></i></h2>
+  <h2>Emploi du temps <i class="fas fa-newspaper"></i></h2>
   <hr class="hrmoyen"/>
   <ul>
     <li>
