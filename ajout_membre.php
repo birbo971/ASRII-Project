@@ -5,8 +5,8 @@ $titre="Ajouter un utilisateur";
   include('includes/navbar.php');
   if($_POST){
     if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['email']) && !empty($_POST['select']) && !empty($_POST['mdp'])){
-        
-         Ajouter_projet::ajoute_utilisateur($_POST['nom'], $_POST['prenom'] , $_POST['email'] , $_POST['select'] , $_POST['mdp']); 
+
+         Ajouter_projet::ajoute_utilisateur($_POST['nom'], $_POST['prenom'] , $_POST['email'] , $_POST['select'] , $_POST['mdp']);
          $test=1;
     }
 }
@@ -65,7 +65,7 @@ color:#00B2CC;
      <div class="form-group">
        <label class="control-label " for="mdp">Mot de passe</label>
        <div class="col-sm-12">
-         <input type="number" class="form-control"  id="mdp" name="mdp" placeholder="Mot de passe">
+         <input type="password" class="form-control"  id="mdp" name="mdp" placeholder="Mot de passe">
        </div>
      </div>
      <div class="form-group">
@@ -73,21 +73,21 @@ color:#00B2CC;
        <div class="col-sm-12">
        <select id="monselect" name="select"  class="form-control">
           <option value=""></option>
-          <option value="enseignant" >enseignant</option> 
+          <option value="enseignant" >enseignant</option>
           <option value="entreprise"  >entreprise</option>
           <option value="etudiant"  >etudiant</option>
           <option value="personnel miaw"  >personnel miaw</option>
       </select>
        </div>
      </div>
-   
+
    <div class="form-group">
      <div class="col-sm-offset-2 col-sm-10">
        <button type="submit" class="btn btn-default">Valider</button>
      </div>
    </div>
     </form>
-    <?php 
+    <?php
     if( isset($test)){
         echo '<div class="col-sm-8 text-center contentcenter"><div class="alert alert-success" role="alert">
         L\'utilisateur à bien été ajouté.

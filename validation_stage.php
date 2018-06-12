@@ -47,7 +47,7 @@ color:#00B2CC;
       echo'<thead class="thead-dark">';
       echo'<tr><th>Titre</th>';
       echo'<th>Description</th>';
-      echo'<th>Etat</th></tr>';
+      echo'<th style="width: 200px;">Etat</th></tr>';
       echo'</thead><tbody>';
     while ($res = $test->fetch()){
       $etat = $res['etat'];
