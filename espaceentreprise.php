@@ -20,7 +20,7 @@ ifIsConnected();
     <li>
       <a href="consulter_ses_projet.php">Consulter ses projets tuteurés.</a>
     </li>
-  </ul><br/>
+  </ul>
   <h2>Stages</h2>
     <hr class="hrmoyen"/>
   <ul>
