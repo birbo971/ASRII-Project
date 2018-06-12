@@ -29,8 +29,8 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
         Projets tuteurés
       </a>
       <a class="dropdown-item" href="#">
-        Offres d/alternance</a>
-      <a class="dropdown-item" href="#">
+        Offres d'alternance</a>
+      <a class="dropdown-item" href="consultersonsupport.php">
         Support de cours
       </a>
     </div>
@@ -111,11 +111,47 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
           <a class="dropdown-item" href=addsupportcours.php>
             Ajouter un support de cours
           </a>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href="consultersonsupport.php">
             Consulter ses supports de cours
           </a>
         </ul>
       </li>
+    </ul>
+  </li>
+
+    <?php
+
+
+  }
+if( $etat == 'personnel miaw'){ ?>
+  <li class="nav-item dropdown <?= isset($enseignant)? $enseignant: ''; ?>">
+    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      admin
+    </a>
+    <ul class="dropdown-menu dropright" aria-labelledby="navbarDropdownMenuLink">
+      <li>
+        <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Validations
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li>
+            <a class="dropdown-item" href="validation_projet.php">
+              Valider les projets
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="validation_stage.php">
+              Valider les stages
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a class="dropdown-item" href="ajout_membre.php">
+          Ajouter un utilisateur
+        </a>
+      </li>
+
     </ul>
   </li>
 
@@ -374,22 +410,40 @@ function updateNotes($notes,$id){
 function addSupportCours(){
 $pdo = DB::get();
 if(isset($_POST['btn-upload']))
-  {    
-     
- $file = rand(1000,100000)."-".$_FILES['file']['name'];
-    $file_loc = $_FILES['file']['tmp_name'];
- $file_size = $_FILES['file']['size'];
- $file_type = $_FILES['file']['type'];
- $folder="uploads/";
- 
+  {
+  if(!empty($_FILES['fichier']['name'])){
+ $file = $_FILES['fichier']['name'];
+ $file_loc = $_FILES['fichier']['tmp_name'];
+ $file_size = $_FILES['fichier']['size'];
+ $file_type = $_FILES['fichier']['type'];
+ $id = $_SESSION['id'];
+ $folder = "uploads/";
  move_uploaded_file($file_loc,$folder.$file);
- $sql = $pdo->prepare("INSERT INTO tbl_uploads(file,type,size) VALUES('$file','$file_type','$file_size')");
+ $sql = $pdo->prepare("INSERT INTO upload(filename,filesize,fileUrl,ens_id) VALUES('$file','$file_size','$folder$file','$id')");
  $sql->execute();
  $row = $sql->rowCount();
- if($row > 0){
-   echo"<div class='alert alert-success'>Vous avez bien importer votre fichier</div>";
- }
-  }
-}
+     if($row > 0){
+       echo"<div class='alert alert-success'>Vous avez bien importer votre fichier</div>";
+     }else{
+       echo'<div class="alert alert-danger">Echec de l\'importation !</div>';
+     }
+   }else{
+     echo'<div class="alert alert-danger">Echec de l\'insertion!</div>';
 
+   }
+  }
+
+}
+function consultSupportCours(){
+  $pdo = DB::get();
+  $req = $pdo->prepare("SELECT filename,filesize,fileUrl FROM upload WHERE ens_id =".$_SESSION['id']."");
+  $req->execute();
+  return $req;
+}
+function consultAllSupportCours(){
+  $pdo = DB::get();
+  $req = $pdo->prepare("SELECT * FROM `upload` join matieres on upload.ens_id = matieres.id_ens");
+  $req->execute();
+  return $req;
+}
 ?>

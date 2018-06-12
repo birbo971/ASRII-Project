@@ -37,17 +37,21 @@ color:#00B2CC;
 
     <hr>
     <br/>
+	
     <?php
-    while ($res = $test->fetch()){
-      echo'<table class="table table-bordered">';
+	echo'<table class="table table-bordered">';
       echo'<thead class="thead-dark">';
       echo'<tr><th>Titre</th>';
       echo'<th>Description</th>';
       echo'<th>Etat</th></tr>';
       echo'</thead><tbody>';
+    while ($res = $test->fetch()){
+      
       echo'<tr><td>'.$res['titre'].'</td><td>'.$res['description'].'</td><td>'.$res['etat'].'</td></tr>';
-      echo'</tbody></table>';
-    } ?>
+      
+    } 
+	echo'</tbody></table>';
+	?>
   <hr>
 </div>
 

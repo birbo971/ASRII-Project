@@ -31,6 +31,7 @@ $titre="Ajouter un projet tuteuré";
     }
     if( !isset($erreur)){
       if( !empty($_SESSION['etat'])){
+        echo "test";
          Ajouter_projet::ajouterProjet($nom,$email,$description,$title,$_SESSION['id']);
       }else{
         Ajouter_projet::ajouterProjet($nom,$email,$description,$title,null);

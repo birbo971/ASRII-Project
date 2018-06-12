@@ -7,18 +7,21 @@ $titre ="Ajouter un support de cours";
 <?php
 ifIsConnected();
 ?>
-<?php if($_SESSION['etat'] == "enseignant"){
+<?php if($_SESSION['etat'] == "enseignant" || $_SESSION['etat'] == "personnel miaw" ){
   ?><!--Content-->
   <div class="container">
     <h1>Ajouter un support de cours</h1>
     <hr/>
     <br/>
-     <form class="" action="addsupportcours.php" method="post">
-            <fieldset>  <h3>Importez un support de cours :</h3> <br/>
-                <input class="btn btn-secondary" type="file" name="file" /><br />
-                <input class="btn btn-light" type="submit" name="btn-upload" value="Envoyer le fichier" /></fieldset>
+     <form action="addsupportcours.php" method="POST" enctype="multipart/form-data">
+            <legend>  <h3 class="text-center">Importez un support de cours :</h3> <br/>
+                <input type="file" name="fichier" class="btn btn-secondary" /><br />
+                <input type="submit" name="btn-upload" value="Envoyer le fichier" class="btn btn-light" /></legend>
      </form>
-     <?php addSupportCours();?>
+
+     <?php
+           addSupportCours();
+  ?>
   </div>
 <?php
 }
