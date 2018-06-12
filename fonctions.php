@@ -221,10 +221,18 @@ function notesEtudiant(){
 }
 function edtEtudiant(){
   date_default_timezone_set('Europe/Paris');
-  $date = date("Y-m-d");
-  $day = date("N") - 1;
+  if (isset ($_GET["date"])) {
+    $date = $_GET["date"];
+    $time = strtotime($_GET["date"]);
+    $day = date("N", $time) - 1;
+  }
+  else {
+    $date = date("Y-m-d");
+    $day = date("N") - 1;
+  }
   // echo date('Y-m-d',strtotime($date. '-1 day'));
   $debutSemaine = date('Y-m-d',strtotime($date. '-' . $day . ' day'));
+  $finSemaine = date('Y-m-d',strtotime($debutSemaine. '+6 day'));
   $semaine = array();
   array_push($semaine, $debutSemaine);
   array_push($semaine, date('Y-m-d', strtotime($debutSemaine. '+1 day')));
@@ -241,7 +249,10 @@ function edtEtudiant(){
   $req->execute();
   $res = $req->rowCount();
 
-  if($res > 0){
+  echo "<h2 class='text-center'><a href='" . $_SERVER['PHP_SELF'] . "?date=" . date('Y-m-d', strtotime($debutSemaine. '-7 day')) . "' class='btn btn-left'><i class='fas fa-arrow-left'></i></a>
+        Semaine du " . $debutSemaine . " au " . $finSemaine . "
+        <a href='" . $_SERVER['PHP_SELF'] . "?date=" . date('Y-m-d', strtotime($debutSemaine. '+7 day')) . "' class='btn btn-left'><i class='fas fa-arrow-right'></i></a></h2>  ";
+    if($res > 0) {
     ?>
     <table class="table table-bordered">
       <thead class="thead-dark">
@@ -256,31 +267,24 @@ function edtEtudiant(){
       </thead>
       <tbody>
     <?php
-    // echo'<table class="table table-bordered">';
-    // echo'<thead class="thead-dark">';
-    // echo'<tr><th>Horaires</th>';
-    // echo'<th>Lundi</th><th>Mardi</th>
-    // <th>Mercredi</th>
-    // <th>jeudi</th>
-    // <th>Vendredi</th></tr>';
-    // echo'</thead><tbody>';
-    // echo'<tr><th>9h00</th></tr>';
-    // echo'<tr><th>13h00</th></tr>';
-    // echo'<tr><th>14h00</th></tr>';
-    // echo'<tr><th>18h00</th></tr>';
-
       while( $row = $req->fetch()){
         if ($row['date_horaire'] == $debutSemaine) {
-          echo "<tr><td></td>";
+          if ($row['plage_horaire'] == "matin") {
+            echo "<tr><td><small>09h00</small><br><small>13h00</small></td>";
+          }
+          else {
+            echo "<tr><td><small>14h00</small><br><small>18h00</small></td>";
+          }
         }
-        echo'<td>'.$row['matieres'] ." " . $row['nom'].'</td>';
+        echo'<td> Matière : ' .$row['matieres'] . '<br>Professeur : ' . $row['nom'].'</td>';
         if ($row['date_horaire'] == $semaine[4]) {
           echo "</tr>";
         }
       }
       echo'</tbody></table>';
-  }else{
-    echo'<div class="alert alert-info" role="alert">Erreur aucun emploi du temps enregistré dans la base !</div>';
+  }
+  else{
+    echo'<div class="alert alert-info" role="alert">Aucun emploi du temps n\'est enregistré dans la base pour cette semaine !</div>';
   }
 }
 
@@ -374,14 +378,14 @@ function updateNotes($notes,$id){
 function addSupportCours(){
 $pdo = DB::get();
 if(isset($_POST['btn-upload']))
-  {    
-     
+  {
+
  $file = rand(1000,100000)."-".$_FILES['file']['name'];
     $file_loc = $_FILES['file']['tmp_name'];
  $file_size = $_FILES['file']['size'];
  $file_type = $_FILES['file']['type'];
  $folder="uploads/";
- 
+
  move_uploaded_file($file_loc,$folder.$file);
  $sql = $pdo->prepare("INSERT INTO tbl_uploads(file,type,size) VALUES('$file','$file_type','$file_size')");
  $sql->execute();
