@@ -219,6 +219,7 @@ function notesEtudiant(){
     echo"Aucune notes dans la base.";
   }
 }
+
 function edtEtudiant(){
   date_default_timezone_set('Europe/Paris');
   if (isset ($_GET["date"])) {
@@ -267,20 +268,123 @@ function edtEtudiant(){
       </thead>
       <tbody>
     <?php
-      while( $row = $req->fetch()){
-        if ($row['date_horaire'] == $debutSemaine) {
-          if ($row['plage_horaire'] == "matin") {
-            echo "<tr><td><small>09h00</small><br><small>13h00</small></td>";
-          }
-          else {
-            echo "<tr><td><small>14h00</small><br><small>18h00</small></td>";
-          }
+      // while( $row = $req->fetch()){
+      //   if ($row['date_horaire'] == $debutSemaine) {
+      //     if ($row['plage_horaire'] == "matin") {
+      //       echo "<tr><td><small>09h00</small><br><small>13h00</small></td>";
+      //     }
+      //     else {
+      //       echo "<tr><td><small>14h00</small><br><small>18h00</small></td>";
+      //     }
+      //   }
+      //   echo'<td> Matière : ' .$row['matieres'] . '<br>Professeur : ' . $row['nom'].'</td>';
+      //   if ($row['date_horaire'] == $semaine[4]) {
+      //     echo "</tr>";
+      //   }
+      // }
+      $i = 0;
+      $row = $req->fetch();
+      while ($i <= 9) {
+        if ($i == 0) {
+          echo "<tr><td><small>09h00</small><br><small>13h00</small></td>";
         }
-        echo'<td> Matière : ' .$row['matieres'] . '<br>Professeur : ' . $row['nom'].'</td>';
-        if ($row['date_horaire'] == $semaine[4]) {
+        if ($i == 5) {
+          echo "<tr><td><small>14h00</small><br><small>18h00</small></td>";
+        }
+        if ($semaine[$i % 5] == $row['date_horaire']) {
+          echo'<td> Matière : ' .$row['matieres'] . '<br>Professeur : ' . $row['nom'].'</td>';
+          $row = $req->fetch();
+        }
+        else {
+          echo'<td> Aucun cours </td>';
+        }
+        if ($i == 4 || $i == 9) {
           echo "</tr>";
         }
+        $i++;
       }
+      echo'</tbody></table>';
+  }
+  else{
+    echo'<div class="alert alert-info" role="alert">Aucun emploi du temps n\'est enregistré dans la base pour cette semaine !</div>';
+  }
+}
+
+function edtEnseignant(){
+  date_default_timezone_set('Europe/Paris');
+  if (isset ($_GET["date"])) {
+    $date = $_GET["date"];
+    $time = strtotime($_GET["date"]);
+    $day = date("N", $time) - 1;
+  }
+  else {
+    $date = date("Y-m-d");
+    $day = date("N") - 1;
+  }
+  // echo date('Y-m-d',strtotime($date. '-1 day'));
+  $debutSemaine = date('Y-m-d',strtotime($date. '-' . $day . ' day'));
+  $finSemaine = date('Y-m-d',strtotime($debutSemaine. '+6 day'));
+  $semaine = array();
+  array_push($semaine, $debutSemaine);
+  array_push($semaine, date('Y-m-d', strtotime($debutSemaine. '+1 day')));
+  array_push($semaine, date('Y-m-d', strtotime($debutSemaine. '+2 day')));
+  array_push($semaine, date('Y-m-d', strtotime($debutSemaine. '+3 day')));
+  array_push($semaine, date('Y-m-d', strtotime($debutSemaine. '+4 day')));
+  $pdo = DB::get();
+  // $req =$pdo->prepare("SELECT DISTINCT plage_horaire,matieres,nom,id_ens FROM emploi_du_temps,matieres,utilisateurs WHERE utilisateurs.id_users = matieres.id_ens AND emploi_du_temps.id_matieres = utilisateurs.id_users;");
+  $req =$pdo->prepare("SELECT DISTINCT plage_horaire,date_horaire,matieres,nom,id_ens FROM emploi_du_temps,matieres,utilisateurs
+  WHERE utilisateurs.id_users = matieres.id_ens
+  AND emploi_du_temps.id_matieres = utilisateurs.id_users
+  AND utilisateurs.id_users = " . $_SESSION['id'] . "
+  AND date_horaire IN ('". $semaine[0]  . "', '" . $semaine[1] . "', '" . $semaine[2] . "', '" . $semaine[3] . "', '" . $semaine[4] . "')
+  ORDER BY plage_horaire, date_horaire;");
+  $req->execute();
+  $res = $req->rowCount();
+
+  echo "<h2 class='text-center'><a href='" . $_SERVER['PHP_SELF'] . "?date=" . date('Y-m-d', strtotime($debutSemaine. '-7 day')) . "' class='btn btn-left'><i class='fas fa-arrow-left'></i></a>
+        Semaine du " . $debutSemaine . " au " . $finSemaine . "
+        <a href='" . $_SERVER['PHP_SELF'] . "?date=" . date('Y-m-d', strtotime($debutSemaine. '+7 day')) . "' class='btn btn-left'><i class='fas fa-arrow-right'></i></a></h2>  ";
+    if($res > 0) {
+    ?>
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>Horaires</th>
+          <th>Lundi</th>
+          <th>Mardi</th>
+          <th>Mercredi</th>
+          <th>jeudi</th>
+          <th>Vendredi</th>
+        </tr>
+      </thead>
+      <tbody>
+    <?php
+      // while( $row = $req->fetch()){
+      $i = 0;
+      $row = $req->fetch();
+      while ($i <= 9) {
+        if ($i == 0) {
+          echo "<tr><td><small>09h00</small><br><small>13h00</small></td>";
+        }
+        if ($i == 5) {
+          echo "<tr><td><small>14h00</small><br><small>18h00</small></td>";
+        }
+        if ($semaine[$i % 5] == $row['date_horaire']) {
+          echo'<td> Matière : ' .$row['matieres'] . '<br>Professeur : ' . $row['nom'].'</td>';
+          $row = $req->fetch();
+        }
+        else {
+          echo'<td> Aucun cours </td>';
+        }
+        if ($i == 4 || $i == 9) {
+          echo "</tr>";
+        }
+        $i++;
+      }
+      // $row = $req->fetch();
+      // print_r ($row);
+      // $row = $req->fetch();
+      // print_r ($row);
       echo'</tbody></table>';
   }
   else{
