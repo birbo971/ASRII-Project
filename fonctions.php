@@ -28,7 +28,7 @@ if(empty($_SESSION['NouvelleSession'])){ ?>
       <a class="dropdown-item" href="#">
         Projets tuteurés
       </a>
-      <a class="dropdown-item" href="#">
+      <a class="dropdown-item" href="consulteroffresalternances.php">
         Offres d'alternance</a>
       <a class="dropdown-item" href="consultersonsupport.php">
         Support de cours
@@ -550,6 +550,12 @@ function consultSupportCours(){
 function consultAllSupportCours(){
   $pdo = DB::get();
   $req = $pdo->prepare("SELECT * FROM `upload` join matieres on upload.ens_id = matieres.id_ens");
+  $req->execute();
+  return $req;
+}
+function consultOffresAlternances(){
+  $pdo = DB::get();
+  $req = $pdo->prepare("SELECT * FROM `ajout_stage` WHERE `etat`='valide';");
   $req->execute();
   return $req;
 }
