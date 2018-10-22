@@ -547,10 +547,9 @@ if(isset($_POST['btn-upload']))
  $id = $_SESSION['id'];
  $folder = "uploads/";
  move_uploaded_file($file_loc,$folder.$file);
- $sql = $pdo->prepare("INSERT INTO upload(filename,filesize,fileUrl,ens_id) VALUES('$file','$file_size','$folder$file','$id')");
- $sql->execute();
- $row = $sql->rowCount();
-     if($row > 0){
+ $sql = $pdo->prepare("INSERT INTO upload(`filename`,`filesize`,`fileUrl`,`ens_id`) VALUES('$file','$file_size','$folder.$file','$id')");
+     if($sql->execute())
+     {
        echo"<div class='alert alert-success'>Vous avez bien importer votre fichier</div>";
      }else{
        echo'<div class="alert alert-danger">Echec de l\'importation !</div>';
